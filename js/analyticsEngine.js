@@ -1,0 +1,5 @@
+(function(){
+ function record(save,match,tactic){let a=save.analytics||(save.analytics={matches:0,wins:0,draws:0,losses:0,goalsFor:0,goalsAgainst:0,tactics:{},formations:{}});a.matches++;a.goalsFor+=match.scoreA;a.goalsAgainst+=match.scoreB;if(match.scoreA>match.scoreB)a.wins++;else if(match.scoreA===match.scoreB)a.draws++;else a.losses++;let t=tactic||'control';a.tactics[t]=(a.tactics[t]||0)+1;let f=Lineup.get(match.teamA,save).formation;a.formations[f]=(a.formations[f]||0)+1;}
+ function summary(save){let a=save.analytics||{};let m=a.matches||0;return {matches:m,winRate:m?((a.wins||0)/m*100).toFixed(1):'0.0',avgFor:m?((a.goalsFor||0)/m).toFixed(2):'0.00',avgAgainst:m?((a.goalsAgainst||0)/m).toFixed(2):'0.00',topTactic:Object.entries(a.tactics||{}).sort((x,y)=>y[1]-x[1])[0]?.[0]||'暂无',topFormation:Object.entries(a.formations||{}).sort((x,y)=>y[1]-x[1])[0]?.[0]||'暂无'};}
+ window.Analytics={record,summary};
+})();

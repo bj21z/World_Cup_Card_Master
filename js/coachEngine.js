@@ -1,0 +1,4 @@
+(function(){
+ function report(save,team){let s=Analytics.summary(save),formation=Lineup.get(team,save).formation,advice=[];if(Number(s.winRate)<45&&Number(s.matches)>=3)advice.push('近期胜率偏低，建议先使用4-2-3-1提高攻守稳定性。');if(Number(s.avgAgainst)>1.6)advice.push('场均失球偏高，领先后优先使用收缩防线或稳守反击。');if(Number(s.avgFor)<1.1&&Number(s.matches)>=3)advice.push('进攻转化不足，可提高边路突破和中路直塞的使用比例。');if(s.topTactic==='allin')advice.push('全员压上使用偏多，容易造成体能下降和反击风险。');if(!advice.length)advice.push('当前样本较少，建议继续完成3—5场比赛后再做稳定判断。');return {team,formation,summary:s,advice,createdAt:new Date().toISOString()};}
+ window.CoachEngine={report};
+})();

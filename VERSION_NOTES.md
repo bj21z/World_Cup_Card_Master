@@ -1,45 +1,33 @@
-# V1.2 Alpha+ 版本说明
+# V1.3 Beta Sprint 1版本说明
 
-## 本次改动摘要
-
-V1.2不是在V1.1上简单增加按钮，而是把比赛从自动翻牌升级为“场景—牌阵—战术—技能—射门—扑救—结果”的可解释决策流程，并增加完整阵容管理、换人、体能、赛后统计、定向成长和开发者平衡实验室。
+## 改动摘要
+- 完成V1.3工程骨架的第一批可运行功能。
+- 新增 `advancedSimulation.js`、`analyticsEngine.js`、`coachEngine.js`。
+- `storage.js` 升级到Schema 13。
+- `index.html` 增加数据驾驶舱、AI教练和矩阵实验页面。
+- `app.js` 增加比赛统计记录、教练报告和矩阵渲染。
 
 ## 新增文件
+- js/advancedSimulation.js
+- js/analyticsEngine.js
+- js/coachEngine.js
+- docs/SPRINT1_SCOPE.md
 
-- `js/lineupEngine.js`：阵型、首发、替补、队长与定位球主罚者
-- `js/simulation.js`：批量比赛模拟与平衡统计
-- `docs/PROJECT_DECISIONS.md`：会议决议落实对照
-- `docs/TEST_REPORT.md`：测试记录
-
-## 主要修改文件
-
-- `index.html`：重建大厅、国家队管理、比赛战术、数据实验室等界面
-- `css/style.css`：增加品牌首页、阵容列表、战术选择、体能条和概率解释样式
-- `js/matchEngine.js`：加入确定性随机种子、战术、体能、双阶段进球判定、换人和统计
-- `js/app.js`：重建交互流程和赛后报告
-- `js/storage.js`：存档结构升级到Schema 12并提供迁移
-- `js/growthEngine.js`：支持自定义首发和定向训练
+## 修改文件
+- index.html
+- js/app.js
+- js/storage.js
+- css/style.css
+- README.md
 
 ## 删除文件
+无。
 
-无。V1.1原有数据文件、赛事引擎和渲染基础继续保留。
-
-## 是否需要全量替换
-
-需要。请用V1.2文件夹完整替换旧版，不要只上传某一个HTML或JS文件。
-
-## 部署步骤
-
-1. 解压压缩包。
-2. 将文件夹内全部文件保持原目录结构上传。
-3. 确保网站入口为根目录 `index.html`。
-4. Cloudflare Pages或GitHub Pages重新部署。
-5. Safari中关闭旧标签页并重新打开；必要时清理网站缓存。
+## 升级方式
+建议全量替换V1.2文件夹。旧LocalStorage将自动迁移到Schema 13。
 
 ## 回滚
+保留V1.2压缩包；回滚后新增分析字段不会影响旧版核心金币、经验和阵容数据。
 
-保留V1.1完整压缩包。出现问题时重新上传V1.1全部文件即可。V1.2使用新的存档字段，但保留V1.1的金币、经验、强化和征途数据迁移。
-
-## 测试结论
-
-JavaScript语法检查通过，文件引用检查通过，压缩包完整性检查通过。真实玩家体验、全机型兼容和大规模数值平衡仍属于Alpha阶段待完成事项。
+## 已知限制
+矩阵模拟属于Sprint 1技术验证，尚非最终平衡结论。每日任务、模拟商城、经济系统与导出工具将在Sprint 2完成。

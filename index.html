@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#07140d">
-<title>绿茵牌阵：世界杯征途 V1.2 Alpha+</title>
+<title>绿茵牌阵：世界杯征途 V1.3 Beta Sprint 1</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div class="app">
 <header class="top hero-top">
-  <div class="brand"><div class="eyebrow">TACTICAL CARD FOOTBALL</div><h1>⚽ 绿茵牌阵：世界杯征途</h1><p>V1.2 Alpha+ · 战术指挥官版</p></div>
+  <div class="brand"><div class="eyebrow">TACTICAL CARD FOOTBALL</div><h1>⚽ 绿茵牌阵：世界杯征途</h1><p>V1.3 Beta Sprint 1 · 竞技实验室·架构版</p></div>
   <div class="currency"><span class="pill">💰 <b id="coins">0</b></span><span class="pill">🏆 <b id="wins">0</b></span><span class="pill">📊 Alpha+</span></div>
 </header>
 <nav class="tabs">
@@ -20,7 +20,7 @@
 <button data-tab="tour">世界杯征途</button>
 <button data-tab="players">球员卡册</button>
 <button data-tab="train">训练中心</button>
-<button data-tab="lab">数据实验室</button>
+<button data-tab="dashboard">数据驾驶舱</button><button data-tab="coach">AI教练</button><button data-tab="lab">竞技实验室</button>
 <button data-tab="rules">规则</button>
 </nav>
 
@@ -29,7 +29,7 @@
    <div><div class="eyebrow">牌阵 · 连携 · 征途</div><h2>每一次出牌，都是一段真实攻防</h2><p>随机1—3人局部对抗、玩家战术决策、阵型影响、个人技能、组合技能、两阶段射门与门将判定、赛后成长报告。</p></div>
    <div class="hero-actions"><button id="goTour" class="btn primary">开启世界杯征途</button><button id="goQuick" class="btn blue">快速比赛</button></div>
  </div>
- <div class="notice"><b>V1.2 Alpha+落实内容：</b>关键回合战术选择、阵容管理、首发/替补、换人、队长与定位球主罚者、体能状态、概率解释、技能条件说明、赛后统计、成长方向、存档版本迁移与自动模拟测试。</div>
+ <div class="notice"><b>V1.3 Beta Sprint 1落实内容：</b>关键回合战术选择、阵容管理、首发/替补、换人、队长与定位球主罚者、体能状态、概率解释、技能条件说明、赛后统计、成长方向、存档版本迁移与自动模拟测试。</div>
  <div class="setup">
    <div class="box"><h3>我的球队</h3><select id="quickA"></select><p id="quickASummary" class="small"></p></div>
    <div class="box"><h3>对手球队</h3><select id="quickB"></select><p id="quickBSummary" class="small"></p></div>
@@ -97,12 +97,22 @@
  <div id="upgradeGrid" class="grid"></div><button id="wipeSave" class="btn danger">清除全部存档</button>
 </section>
 
+
+<section id="dashboard" class="panel">
+ <div class="hero-card"><div><div class="eyebrow">DATA-DRIVEN FOOTBALL</div><h2>数据驾驶舱</h2><p>汇总真实游玩记录、胜率、进失球、常用战术与阵型。Sprint 2将继续加入趋势图与球员表现榜。</p></div><button id="refreshDashboard" class="btn primary">刷新报告</button></div>
+ <div id="dashboardCards" class="statline"></div>
+ <div class="two-col"><div class="box"><h2>最近比赛</h2><div id="recentMatches"></div></div><div class="box"><h2>开发状态</h2><div id="sprintStatus"></div></div></div>
+</section>
+<section id="coach" class="panel">
+ <div class="two-col"><div class="box"><h2>AI教练报告</h2><label>分析球队<select id="coachTeam"></select></label><button id="generateCoach" class="btn primary full">生成教练报告</button></div><div class="box"><h2>报告说明</h2><p>当前采用透明规则型分析，不读取付费状态，也不会暗中修改比赛概率。</p></div></div>
+ <div id="coachReport" class="box" style="margin-top:12px">尚未生成报告。</div>
+</section>
 <section id="lab" class="panel">
  <div class="two-col">
-  <div class="box"><h2>自动模拟测试</h2><p>用于Alpha阶段平衡检查，不影响正式存档。</p><label>模拟场次<select id="simCount"><option>100</option><option selected>1000</option><option>5000</option></select></label><button id="runSimulation" class="btn primary full">运行模拟</button></div>
+  <div class="box"><h2>自动模拟测试</h2><p>用于Alpha阶段平衡检查，不影响正式存档。</p><label>模拟场次<select id="simCount"><option>100</option><option selected>1000</option><option>5000</option><option>10000</option></select></label><button id="runSimulation" class="btn primary full">运行模拟</button></div>
   <div class="box"><h2>技术状态</h2><div id="techStatus"></div></div>
  </div>
- <div id="simulationResult" class="box" style="margin-top:12px">尚未运行模拟。</div>
+ <div id="simulationResult" class="box" style="margin-top:12px">尚未运行模拟。</div><div class="box" style="margin-top:12px"><h2>矩阵模拟</h2><label>每组对抗场次<select id="matrixCount"><option>20</option><option selected>50</option><option>100</option></select></label><button id="runMatrix" class="btn blue full">生成阵型与战术矩阵</button><div id="matrixResult" class="matrix-scroll">尚未生成。</div></div>
 </section>
 
 <section id="rules" class="panel">
@@ -112,13 +122,13 @@
  </div>
  <div class="box" style="margin-top:12px"><h2>数据与版权说明</h2><p>球员能力属于基于公开表现构建的游戏化评分，不是FIFA、EA或任何官方评分。当前为非商业原型；正式公开发行前需完成赛事名称、球员姓名、肖像、队徽、国旗和数据授权审查。</p></div>
 </section>
-<div class="footer">V1.2 Alpha+ · 非商业开发原型 · 本地存档</div>
+<div class="footer">V1.3 Beta Sprint 1 · Schema 13 · 非商业开发原型 · 本地存档</div>
 </div>
 
 <div id="modal" class="modal"><div class="modalbox"><div id="resultTitle" class="result"></div><div id="resultBody"></div><button id="closeModal" class="btn primary full">确定</button></div></div>
 <div id="subModal" class="modal"><div class="modalbox"><div class="result">比赛换人</div><div id="subBody"></div><button id="closeSub" class="btn full">关闭</button></div></div>
-<div id="welcome" class="modal"><div class="modalbox"><div class="result">V1.2 Alpha+ 战术指挥官版</div><p>会议决议已落实：阵容管理、战术选择、换人、体能、概率解释、技能条件、成长方向、赛后分析、存档迁移和模拟实验室。</p><button id="welcomeClose" class="btn primary full">进入游戏</button></div></div>
+<div id="welcome" class="modal"><div class="modalbox"><div class="result">V1.3 Beta Sprint 1 竞技实验室·架构版</div><p>会议决议已落实：阵容管理、战术选择、换人、体能、概率解释、技能条件、成长方向、赛后分析、存档迁移和模拟实验室。</p><button id="welcomeClose" class="btn primary full">进入游戏</button></div></div>
 
 <script src="data/players.js"></script><script src="data/teams.js"></script><script src="data/balance.js"></script><script src="data/skills.js"></script><script src="data/combos.js"></script>
-<script src="js/storage.js"></script><script src="js/growthEngine.js"></script><script src="js/lineupEngine.js"></script><script src="js/matchEngine.js"></script><script src="js/tournamentEngine.js"></script><script src="js/render.js"></script><script src="js/simulation.js"></script><script src="js/app.js"></script>
+<script src="js/storage.js"></script><script src="js/growthEngine.js"></script><script src="js/lineupEngine.js"></script><script src="js/matchEngine.js"></script><script src="js/tournamentEngine.js"></script><script src="js/render.js"></script><script src="js/simulation.js"></script><script src="js/advancedSimulation.js"></script><script src="js/analyticsEngine.js"></script><script src="js/coachEngine.js"></script><script src="js/app.js"></script>
 </body></html>
