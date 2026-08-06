@@ -17,3 +17,7 @@
 
 .beta-banner{border-color:#d6b64b;background:linear-gradient(135deg,#30270c,#142219)}
 .tutorial-box{max-width:520px}.tutorial-box .result{margin-top:16px}.device-info{white-space:pre-wrap;word-break:break-all;background:#07110b;padding:10px;border-radius:10px;max-height:260px;overflow:auto;font-size:11px}.bug-grid{display:grid;grid-template-columns:1fr 2fr;gap:10px}.bug-item{padding:10px;border-bottom:1px solid #294535;display:flex;justify-content:space-between;gap:10px}.bug-item span{font-size:11px;color:#a9c7b1}.qa-row{padding:7px;border-radius:8px;margin:4px 0}.qa-row.ok{background:#153522}.qa-row.bad{background:#421b1b}details{margin-top:7px}details summary{cursor:pointer;color:#ffd166}@media(max-width:600px){.bug-grid{grid-template-columns:1fr}.bug-item{display:block}}
+#nextRound[aria-busy="true"]{opacity:.78;cursor:wait;position:relative}
+#nextRound[aria-busy="true"]::after{content:"";display:inline-block;width:14px;height:14px;margin-left:8px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;vertical-align:-2px;animation:roundSpin .7s linear infinite}
+@keyframes roundSpin{to{transform:rotate(360deg)}}
+#tacticPanel:not(.hidden){outline:2px solid #ffd16666;box-shadow:0 0 0 6px #ffd16612,0 12px 34px #0006}

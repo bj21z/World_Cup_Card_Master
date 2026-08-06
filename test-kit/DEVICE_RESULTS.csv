@@ -1,0 +1,11 @@
+device_id,tester,device_model,os_version,browser,screen_mode,first_open,tutorial,start_match,next_round_button,formation_generated,tactic_selection,five_manual_rounds,auto_play,substitution,match_finish,tournament_resume,save_backup_restore,foreground_background,rotation,thirty_min_stability,highest_issue_level,overall_result,notes
+DEV-01,,,,,,,,,,,,,,,,,,,,,,,NOT_TESTED,
+DEV-02,,,,,,,,,,,,,,,,,,,,,,,NOT_TESTED,
+DEV-03,,,,,,,,,,,,,,,,,,,,,,,NOT_TESTED,
+DEV-04,,,,,,,,,,,,,,,,,,,,,,,NOT_TESTED,
+DEV-05,,,,,,,,,,,,,,,,,,,,,,,NOT_TESTED,
+DEV-06,,,,,,,,,,,,,,,,,,,,,,,NOT_TESTED,
+DEV-07,,,,,,,,,,,,,,,,,,,,,,,NOT_TESTED,
+DEV-08,,,,,,,,,,,,,,,,,,,,,,,NOT_TESTED,
+DEV-09,,,,,,,,,,,,,,,,,,,,,,,NOT_TESTED,
+DEV-10,,,,,,,,,,,,,,,,,,,,,,,NOT_TESTED,

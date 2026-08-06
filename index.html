@@ -29,7 +29,7 @@
    <div><div class="eyebrow">牌阵 · 连携 · 征途</div><h2>每一次出牌，都是一段真实攻防</h2><p>随机1—3人局部对抗、玩家战术决策、阵型影响、个人技能、组合技能、两阶段射门与门将判定、赛后成长报告。</p></div>
    <div class="hero-actions"><button id="goTour" class="btn primary">开启世界杯征途</button><button id="goQuick" class="btn blue">快速比赛</button></div>
  </div>
- <div class="notice beta-banner"><b>V1.3.1-BC01 封闭测试版：</b>当前为开发测试版本，可能存在Bug或存档丢失；模拟商城不产生真实交易。<br><b>本版落实内容：</b>关键回合战术选择、阵容管理、首发/替补、换人、队长与定位球主罚者、体能状态、概率解释、技能条件说明、赛后统计、成长方向、存档版本迁移与自动模拟测试。</div>
+ <div class="notice beta-banner"><b>V1.3.1-BC02 封闭测试版：</b>当前为开发测试版本，可能存在Bug或存档丢失；模拟商城不产生真实交易。<br><b>本版落实内容：</b>关键回合战术选择、阵容管理、首发/替补、换人、队长与定位球主罚者、体能状态、概率解释、技能条件说明、赛后统计、成长方向、存档版本迁移与自动模拟测试。</div>
  <div class="setup">
    <div class="box"><h3>我的球队</h3><select id="quickA"></select><p id="quickASummary" class="small"></p></div>
    <div class="box"><h3>对手球队</h3><select id="quickB"></select><p id="quickBSummary" class="small"></p></div>
@@ -74,7 +74,7 @@
   <div class="battle"><div class="duel" id="duelA">等待比赛</div><div class="vs">VS</div><div class="duel" id="duelB">等待比赛</div></div>
   <div id="probExplain" class="explain-card"><b>概率解释：</b>下一回合结算后显示。</div>
   <div id="matchLog" class="log"><div>比赛日志将在这里显示。</div></div>
-  <div class="controls"><button class="btn primary" id="nextRound">生成下一回合</button><button class="btn blue" id="autoFinish">智能托管</button><button class="btn danger" id="resetMatch">退出本场</button></div>
+  <div class="controls"><button type="button" class="btn primary" id="nextRound" aria-live="polite">生成下一回合</button><button class="btn blue" id="autoFinish">智能托管</button><button class="btn danger" id="resetMatch">退出本场</button></div>
  </div>
 </section>
 
@@ -122,7 +122,7 @@
 
 
 <section id="beta" class="panel">
- <div class="hero-card"><div><div class="eyebrow">CLOSED BETA CONTROL</div><h2>封闭Beta测试中心</h2><p>配置测试组、概率说明、新手教学、Bug报告、存档备份和发布演练。</p></div><span class="pill" id="buildBadge">V1.3.1-BC01</span></div>
+ <div class="hero-card"><div><div class="eyebrow">CLOSED BETA CONTROL</div><h2>封闭Beta测试中心</h2><p>配置测试组、概率说明、新手教学、Bug报告、存档备份和发布演练。</p></div><span class="pill" id="buildBadge">V1.3.1-BC02</span></div>
  <div class="two-col"><div class="box"><h2>测试配置</h2><label>测试组<select id="testerGroup"><option>A</option><option>B</option><option>C</option><option>D</option></select></label><label>概率解释<select id="probMode"><option value="full">完整</option><option value="compact">简化</option><option value="expand">默认简化·可展开</option></select></label><button id="applyBetaConfig" class="btn primary full">应用测试配置</button><div id="groupExplain" class="notice compact"></div></div><div class="box"><h2>新手与发布演练</h2><button id="restartTutorial" class="btn full">重新开始五步教学</button><button id="runReleaseRehearsal" class="btn blue full">运行发布演练自检</button><div id="rehearsalResult" class="small">尚未运行。</div></div></div>
  <div class="two-col" style="margin-top:12px"><div class="box"><h2>存档备份与恢复</h2><button id="createBackup" class="btn primary full">创建本机备份</button><div id="backupList"></div></div><div class="box"><h2>设备信息</h2><button id="copyDevice" class="btn full">复制设备与版本信息</button><pre id="deviceInfo" class="device-info"></pre></div></div>
  <div class="box" style="margin-top:12px"><h2>Bug报告</h2><div class="bug-grid"><label>等级<select id="bugSeverity"><option>S1</option><option selected>S2</option><option>S3</option><option>S4</option></select></label><label>标题<input id="bugTitle"></label></div><label>复现步骤<textarea id="bugSteps"></textarea></label><label>实际结果<textarea id="bugActual"></textarea></label><label>预期结果<textarea id="bugExpected"></textarea></label><button id="saveBug" class="btn danger full">保存Bug报告</button><div id="bugList"></div></div>
@@ -140,7 +140,7 @@
  </div>
  <div class="box" style="margin-top:12px"><h2>数据与版权说明</h2><p>球员能力属于基于公开表现构建的游戏化评分，不是FIFA、EA或任何官方评分。当前为非商业原型；正式公开发行前需完成赛事名称、球员姓名、肖像、队徽、国旗和数据授权审查。</p></div>
 </section>
-<div class="footer">V1.3.1 Beta RC · Schema 16 · 非商业开发原型 · 本地存档</div>
+<div class="footer">V1.3.1 Beta RC BC02 · Schema 17 · 非商业开发原型 · 本地存档</div>
 </div>
 
 <div id="modal" class="modal"><div class="modalbox"><div id="resultTitle" class="result"></div><div id="resultBody"></div><button id="closeModal" class="btn primary full">确定</button></div></div>

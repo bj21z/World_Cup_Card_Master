@@ -1,0 +1,2 @@
+issue_id,device_id,build_id,severity,module,title,reproduction_steps,actual_result,expected_result,reproducibility,screenshot_or_video,workaround,status,owner,notes
+ISSUE-001,,V1.3.1-BC02,,,,,,,,,,NEW,,
