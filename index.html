@@ -4,32 +4,34 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#07140d">
-<title>绿茵牌阵：世界杯征途 V1.3.1 Beta RC</title>
+<title>绿茵牌阵：世界杯征途 V1.4.0</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div class="app">
 <header class="top hero-top">
-  <div class="brand"><div class="eyebrow">TACTICAL CARD FOOTBALL</div><h1>⚽ 绿茵牌阵：世界杯征途</h1><p>V1.3.1 Beta RC · 封闭测试修复版</p></div>
-  <div class="currency"><span class="pill">💰 <b id="coins">0</b></span><span class="pill">🏆 <b id="wins">0</b></span><span class="pill">🧪 BC01</span></div>
+  <div class="brand"><div class="eyebrow">TACTICAL CARD FOOTBALL</div><h1>⚽ 绿茵牌阵：世界杯征途</h1><p>V1.4.0 · 赛场焕新版</p></div>
+  <div class="currency"><span class="pill">💰 <b id="coins">0</b></span><span class="pill">🏆 <b id="wins">0</b></span><span class="pill">🛡️ Schema 21</span></div>
 </header>
 <nav class="tabs">
 <button class="active" data-tab="home">大厅</button>
 <button data-tab="squad">国家队管理</button>
 <button data-tab="match">比赛中心</button>
 <button data-tab="tour">世界杯征途</button>
-<button data-tab="players">球员卡册</button>
-<button data-tab="train">训练中心</button>
-<button data-tab="dashboard">数据驾驶舱</button><button data-tab="missions">任务中心</button><button data-tab="shop">模拟商城</button><button data-tab="coach">AI教练</button><button data-tab="lab">竞技实验室</button><button data-tab="feedback">Beta反馈</button>
-<button data-tab="beta">封测中心</button><button data-tab="qa">Beta验收</button><button data-tab="rules">规则</button>
-</nav>
+<button class="advanced-tab" data-tab="players">球员卡册</button>
+<button class="advanced-tab" data-tab="train">训练中心</button>
+<button class="advanced-tab" data-tab="dashboard">数据驾驶舱</button><button class="advanced-tab" data-tab="missions">任务中心</button><button class="advanced-tab" data-tab="shop">模拟商城</button><button class="advanced-tab" data-tab="coach">AI教练</button><button class="advanced-tab" data-tab="lab">竞技实验室</button><button class="advanced-tab" data-tab="feedback">Beta反馈</button>
+<button class="advanced-tab" data-tab="beta">封测中心</button><button class="advanced-tab" data-tab="qa">Beta验收</button><button class="advanced-tab" data-tab="content">内容中心</button><button class="advanced-tab" data-tab="history">版本历史</button><button class="advanced-tab" data-tab="rules">规则</button>
+<button id="toggleMore" class="more-nav" type="button">更多功能</button></nav>
+<div id="recoveryBar" class="recovery-bar hidden"><div><b>发现未结束比赛</b><span id="recoveryText"></span></div><div><button id="continueMatch" class="btn primary" type="button">继续比赛</button><button id="discardMatch" class="btn" type="button">清除恢复点</button></div></div>
+
 
 <section id="home" class="panel active">
  <div class="hero-card">
    <div><div class="eyebrow">牌阵 · 连携 · 征途</div><h2>每一次出牌，都是一段真实攻防</h2><p>随机1—3人局部对抗、玩家战术决策、阵型影响、个人技能、组合技能、两阶段射门与门将判定、赛后成长报告。</p></div>
    <div class="hero-actions"><button id="goTour" class="btn primary">开启世界杯征途</button><button id="goQuick" class="btn blue">快速比赛</button></div>
  </div>
- <div class="notice beta-banner"><b>V1.3.1-BC02 封闭测试版：</b>当前为开发测试版本，可能存在Bug或存档丢失；模拟商城不产生真实交易。<br><b>本版落实内容：</b>关键回合战术选择、阵容管理、首发/替补、换人、队长与定位球主罚者、体能状态、概率解释、技能条件说明、赛后统计、成长方向、存档版本迁移与自动模拟测试。</div>
+ <div class="notice beta-banner"><b>V1.4.0 赛场焕新版：</b>四个开发阶段已完成整合，正式形成核心稳定性、赛场演出、AI与数值诊断、内容治理及版本历史中心。<br><b>重要说明：</b>本产品仍为非官方、非商业、单机网页开发版；模拟商城不产生真实交易，球员评分属于游戏化评分。</div>
  <div class="setup">
    <div class="box"><h3>我的球队</h3><select id="quickA"></select><p id="quickASummary" class="small"></p></div>
    <div class="box"><h3>对手球队</h3><select id="quickB"></select><p id="quickBSummary" class="small"></p></div>
@@ -57,11 +59,11 @@
 
 <section id="match" class="panel">
  <div class="match-toolbar">
-  <span class="stage-badge" id="matchMode">未开始</span>
+  <span class="stage-badge" id="matchMode">未开始</span><span class="match-phase" id="matchPhase" data-phase="idle">等待开赛</span>
   <span class="stage-badge">难度 <b id="matchDifficulty">标准</b></span>
   <button id="openSub" class="btn">换人</button>
  </div>
- <div class="pitch">
+ <div class="pitch" id="matchPitch"><div id="eventOverlay" class="event-overlay" aria-live="polite"></div>
   <div class="scoreboard"><span id="scoreNameA">A</span> <b id="scoreA">0</b> — <b id="scoreB">0</b> <span id="scoreNameB">B</span>
    <div class="small"><span id="minute">0'</span> · 回合 <span id="round">0</span>/<span id="maxRound">15</span> · 士气 <span id="moraleA">50</span>/<span id="moraleB">50</span></div>
   </div>
@@ -73,7 +75,7 @@
   </div>
   <div class="battle"><div class="duel" id="duelA">等待比赛</div><div class="vs">VS</div><div class="duel" id="duelB">等待比赛</div></div>
   <div id="probExplain" class="explain-card"><b>概率解释：</b>下一回合结算后显示。</div>
-  <div id="matchLog" class="log"><div>比赛日志将在这里显示。</div></div>
+  <div class="timeline-title">关键事件时间轴</div><div id="matchLog" class="log timeline"><div>比赛日志将在这里显示。</div></div>
   <div class="controls"><button type="button" class="btn primary" id="nextRound" aria-live="polite">生成下一回合</button><button class="btn blue" id="autoFinish">智能托管</button><button class="btn danger" id="resetMatch">退出本场</button></div>
  </div>
 </section>
@@ -117,22 +119,29 @@
   <div class="box"><h2>技术状态</h2><div id="techStatus"></div></div>
  </div>
  <div id="simulationResult" class="box" style="margin-top:12px">尚未运行模拟。</div><div class="box" style="margin-top:12px"><h2>矩阵模拟</h2><label>每组对抗场次<select id="matrixCount"><option>20</option><option selected>50</option><option>100</option></select></label><button id="runMatrix" class="btn blue full">生成阵型与战术矩阵</button><div id="matrixResult" class="matrix-scroll">尚未生成。</div></div>
+<div class="diagnostic-suite">
+ <div class="hero-card"><div><div class="eyebrow">V1.4 SPRINT 3</div><h2>AI与数值诊断套件</h2><p>以独立批量模拟检查战术、阵型、技能、组合、换人、体能、AI重复行为和免费经济循环。诊断结果不修改正式比赛数值。</p></div><span class="pill">诊断模式</span></div>
+ <div class="two-col" style="margin-top:12px"><div class="box"><h2>逐回合贡献模拟</h2><label>回合样本<select id="diagRoundCount"><option>1000</option><option selected>5000</option><option>10000</option><option>30000</option></select></label><button id="runDiagRounds" class="btn primary full">运行逐回合扫描</button></div><div class="box"><h2>换人收益模拟</h2><label>换人样本<select id="diagSubCount"><option>1000</option><option selected>3000</option><option>10000</option></select></label><button id="runDiagSub" class="btn blue full">分析换人窗口</button></div></div>
+ <div id="diagRoundResult" class="box" style="margin-top:12px">尚未运行逐回合扫描。</div><div id="diagSubResult" class="box" style="margin-top:12px">尚未运行换人模拟。</div>
+ <div class="two-col" style="margin-top:12px"><div class="box"><h2>AI行为重复预警</h2><label>决策样本<select id="diagAICount"><option>500</option><option selected>2000</option><option>10000</option></select></label><button id="runDiagAI" class="btn primary full">扫描AI行为</button><div id="diagAIResult" class="small" style="margin-top:10px">尚未运行。</div></div><div class="box"><h2>成长经济长期模拟</h2><label>模拟周期<select id="diagDays"><option>14</option><option selected>30</option><option>60</option><option>90</option></select></label><button id="runDiagEconomy" class="btn blue full">模拟免费经济</button><div id="diagEconomyResult" class="small" style="margin-top:10px">尚未运行。</div></div></div>
+</div>
 </section>
 
-
-
 <section id="beta" class="panel">
- <div class="hero-card"><div><div class="eyebrow">CLOSED BETA CONTROL</div><h2>封闭Beta测试中心</h2><p>配置测试组、概率说明、新手教学、Bug报告、存档备份和发布演练。</p></div><span class="pill" id="buildBadge">V1.3.1-BC02</span></div>
+ <div class="hero-card"><div><div class="eyebrow">CLOSED BETA CONTROL</div><h2>封闭Beta测试中心</h2><p>配置测试组、概率说明、新手教学、Bug报告、存档备份和发布演练。</p></div><span class="pill" id="buildBadge">V1.4.0</span></div>
  <div class="two-col"><div class="box"><h2>测试配置</h2><label>测试组<select id="testerGroup"><option>A</option><option>B</option><option>C</option><option>D</option></select></label><label>概率解释<select id="probMode"><option value="full">完整</option><option value="compact">简化</option><option value="expand">默认简化·可展开</option></select></label><button id="applyBetaConfig" class="btn primary full">应用测试配置</button><div id="groupExplain" class="notice compact"></div></div><div class="box"><h2>新手与发布演练</h2><button id="restartTutorial" class="btn full">重新开始五步教学</button><button id="runReleaseRehearsal" class="btn blue full">运行发布演练自检</button><div id="rehearsalResult" class="small">尚未运行。</div></div></div>
  <div class="two-col" style="margin-top:12px"><div class="box"><h2>存档备份与恢复</h2><button id="createBackup" class="btn primary full">创建本机备份</button><div id="backupList"></div></div><div class="box"><h2>设备信息</h2><button id="copyDevice" class="btn full">复制设备与版本信息</button><pre id="deviceInfo" class="device-info"></pre></div></div>
  <div class="box" style="margin-top:12px"><h2>Bug报告</h2><div class="bug-grid"><label>等级<select id="bugSeverity"><option>S1</option><option selected>S2</option><option>S3</option><option>S4</option></select></label><label>标题<input id="bugTitle"></label></div><label>复现步骤<textarea id="bugSteps"></textarea></label><label>实际结果<textarea id="bugActual"></textarea></label><label>预期结果<textarea id="bugExpected"></textarea></label><button id="saveBug" class="btn danger full">保存Bug报告</button><div id="bugList"></div></div>
  <div class="two-col" style="margin-top:12px"><div class="box"><h2>Beta测试说明</h2><p>这是开发测试版本；进度可能调整或丢失；商城仅作展示；不收集支付信息；正式版本内容可能变化。</p></div><div class="box"><h2>隐私简要说明</h2><p>当前数据默认保存在本机浏览器。反馈与Bug只有在你主动复制或导出后才会离开设备。</p></div></div>
 </section>
 <section id="qa" class="panel">
- <div class="hero-card"><div><div class="eyebrow">SPRINT 3 · RELEASE GATE</div><h2>Beta验收与平衡预警中心</h2><p>统一检查浏览器能力、核心模块、世界杯数据、存档迁移、商城隔离与快速平衡状态。</p></div><div class="pill">Schema <b>15</b></div></div>
+ <div class="hero-card"><div><div class="eyebrow">SPRINT 3 · RELEASE GATE</div><h2>Beta验收与平衡预警中心</h2><p>统一检查浏览器能力、核心模块、世界杯数据、存档迁移、商城隔离与快速平衡状态。</p></div><div class="pill">Schema <b>21</b></div></div>
  <div class="two-col"><div class="box"><h2>一键Beta自检</h2><label>快速矩阵每组场次<select id="qaPerPair"><option>20</option><option selected>30</option><option>50</option></select></label><button id="runQA" class="btn primary full">运行完整自检</button><div id="qaResult" class="small">尚未运行。</div></div><div class="box"><h2>Beta准入门槛</h2><div id="betaGate"></div></div></div>
  <div class="box" style="margin-top:12px"><h2>正式平衡扫描</h2><p class="small">按阵型、战术交叉模拟并对平均胜率高于58%或低于42%的项目自动预警。</p><select id="formalPerPair"><option>50</option><option selected>100</option><option>250</option><option>500</option></select><button id="runFormal" class="btn blue">运行扫描</button><div id="formalResult" style="margin-top:12px">尚未运行。</div></div>
 </section>
+
+<section id="content" class="panel"><div id="contentCenter"></div></section>
+<section id="history" class="panel"><div id="versionHistoryCenter"></div></section>
 <section id="rules" class="panel">
  <div class="two-col">
   <div class="box"><h2>核心结算</h2><p>场景生成 → 1—3人牌阵 → 玩家战术 → 技能与连携 → 形成射门概率 → 门将二次判定 → 剧情结果。</p><p class="small">主将100%、副将65%、第三人45%，多人优势递减，避免三张牌必胜。</p></div>
@@ -140,14 +149,14 @@
  </div>
  <div class="box" style="margin-top:12px"><h2>数据与版权说明</h2><p>球员能力属于基于公开表现构建的游戏化评分，不是FIFA、EA或任何官方评分。当前为非商业原型；正式公开发行前需完成赛事名称、球员姓名、肖像、队徽、国旗和数据授权审查。</p></div>
 </section>
-<div class="footer">V1.3.1 Beta RC BC02 · Schema 17 · 非商业开发原型 · 本地存档</div>
+<div class="footer">V1.4.0 · Schema 21 · 非官方非商业单机开发版 · 本地存档</div>
 </div>
 
 <div id="modal" class="modal"><div class="modalbox"><div id="resultTitle" class="result"></div><div id="resultBody"></div><button id="closeModal" class="btn primary full">确定</button></div></div>
 <div id="subModal" class="modal"><div class="modalbox"><div class="result">比赛换人</div><div id="subBody"></div><button id="closeSub" class="btn full">关闭</button></div></div>
 <div id="tutorialModal" class="modal"><div class="modalbox tutorial-box"><span id="tutorialStep" class="stage-badge"></span><div id="tutorialTitle" class="result"></div><p id="tutorialBody"></p><div class="controls"><button id="tutorialSkip" class="btn">跳过教学</button><button id="tutorialNext" class="btn primary">下一步</button></div></div></div>
-<div id="welcome" class="modal"><div class="modalbox"><div class="result">V1.3.1 Beta RC 封闭测试修复版</div><p>会议决议已落实：阵容管理、战术选择、换人、体能、概率解释、技能条件、成长方向、赛后分析、存档迁移和模拟实验室。</p><button id="welcomeClose" class="btn primary full">进入游戏</button></div></div>
+<div id="welcome" class="modal"><div class="modalbox"><div class="result">V1.4.0 赛场焕新版</div><p><b>本次重点：</b>首页与比赛稳定性、1—3人牌阵演出、球星及组合技能反馈、AI与数值诊断、内容治理、版本历史中心全部完成整合。旧版Schema 21存档可继续使用。</p><p class="small">当前为非官方、非商业、单机网页开发版，不含真实支付。</p><button id="welcomeClose" class="btn primary full">进入游戏</button></div></div>
 
-<script src="data/players.js"></script><script src="data/betaReleaseConfig.js"></script><script src="data/betaConfig.js"></script><script src="data/economy.js"></script><script src="data/missions.js"></script><script src="data/shopItems.js"></script><script src="data/teams.js"></script><script src="data/balance.js"></script><script src="data/skills.js"></script><script src="data/combos.js"></script>
-<script src="js/storage.js"></script><script src="js/betaReleaseManager.js"></script><script src="js/tutorialEngine.js"></script><script src="js/betaTools.js"></script><script src="js/economyEngine.js"></script><script src="js/missionEngine.js"></script><script src="js/shopEngine.js"></script><script src="js/reportExporter.js"></script><script src="js/feedbackEngine.js"></script><script src="js/growthEngine.js"></script><script src="js/lineupEngine.js"></script><script src="js/matchEngine.js"></script><script src="js/tournamentEngine.js"></script><script src="js/render.js"></script><script src="js/simulation.js"></script><script src="js/advancedSimulation.js"></script><script src="js/balanceValidator.js"></script><script src="js/betaQAEngine.js"></script><script src="js/analyticsEngine.js"></script><script src="js/coachEngine.js"></script><script src="js/app.js"></script><script src="js/sprint3.js"></script><script src="js/betaReleaseUI.js"></script>
+<script src="data/players.js"></script><script src="data/versionHistory.js"></script><script src="data/contentGovernance.js"></script><script src="data/betaReleaseConfig.js"></script><script src="data/betaConfig.js"></script><script src="data/economy.js"></script><script src="data/missions.js"></script><script src="data/shopItems.js"></script><script src="data/teams.js"></script><script src="data/balance.js"></script><script src="data/skills.js"></script><script src="data/combos.js"></script>
+<script src="js/storage.js"></script><script src="js/versionHistoryUI.js"></script><script src="js/contentUI.js"></script><script src="js/betaReleaseManager.js"></script><script src="js/tutorialEngine.js"></script><script src="js/betaTools.js"></script><script src="js/economyEngine.js"></script><script src="js/missionEngine.js"></script><script src="js/shopEngine.js"></script><script src="js/reportExporter.js"></script><script src="js/feedbackEngine.js"></script><script src="js/growthEngine.js"></script><script src="js/lineupEngine.js"></script><script src="js/matchEngine.js"></script><script src="js/tournamentEngine.js"></script><script src="js/render.js"></script><script src="js/simulation.js"></script><script src="js/advancedSimulation.js"></script><script src="js/balanceValidator.js"></script><script src="js/betaQAEngine.js"></script><script src="js/analyticsEngine.js"></script><script src="js/coachEngine.js"></script><script src="js/diagnosticsEngine.js"></script><script src="js/diagnosticsUI.js"></script><script src="js/app.js"></script><script src="js/sprint3.js"></script><script src="js/betaReleaseUI.js"></script>
 </body></html>
