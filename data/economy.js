@@ -1,0 +1,1 @@
+window.ECONOMY_CONFIG={match:{win:120,draw:80,loss:50},tourBonus:{group:30,knockout:80,champion:600},trainingCost:120,missionRewards:{daily:60,weekly:220},freePath:{targetMatchesToTrain:2,targetDaysToCoreUpgrade:7}};

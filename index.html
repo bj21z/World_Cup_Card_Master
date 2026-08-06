@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#07140d">
-<title>绿茵牌阵：世界杯征途 V1.3 Beta Sprint 1</title>
+<title>绿茵牌阵：世界杯征途 V1.3 Beta Sprint 2</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div class="app">
 <header class="top hero-top">
-  <div class="brand"><div class="eyebrow">TACTICAL CARD FOOTBALL</div><h1>⚽ 绿茵牌阵：世界杯征途</h1><p>V1.3 Beta Sprint 1 · 竞技实验室·架构版</p></div>
-  <div class="currency"><span class="pill">💰 <b id="coins">0</b></span><span class="pill">🏆 <b id="wins">0</b></span><span class="pill">📊 Alpha+</span></div>
+  <div class="brand"><div class="eyebrow">TACTICAL CARD FOOTBALL</div><h1>⚽ 绿茵牌阵：世界杯征途</h1><p>V1.3 Beta Sprint 2 · 任务经济·商业化隔离版</p></div>
+  <div class="currency"><span class="pill">💰 <b id="coins">0</b></span><span class="pill">🏆 <b id="wins">0</b></span><span class="pill">🧪 Beta S2</span></div>
 </header>
 <nav class="tabs">
 <button class="active" data-tab="home">大厅</button>
@@ -20,7 +20,7 @@
 <button data-tab="tour">世界杯征途</button>
 <button data-tab="players">球员卡册</button>
 <button data-tab="train">训练中心</button>
-<button data-tab="dashboard">数据驾驶舱</button><button data-tab="coach">AI教练</button><button data-tab="lab">竞技实验室</button>
+<button data-tab="dashboard">数据驾驶舱</button><button data-tab="missions">任务中心</button><button data-tab="shop">模拟商城</button><button data-tab="coach">AI教练</button><button data-tab="lab">竞技实验室</button><button data-tab="feedback">Beta反馈</button>
 <button data-tab="rules">规则</button>
 </nav>
 
@@ -29,7 +29,7 @@
    <div><div class="eyebrow">牌阵 · 连携 · 征途</div><h2>每一次出牌，都是一段真实攻防</h2><p>随机1—3人局部对抗、玩家战术决策、阵型影响、个人技能、组合技能、两阶段射门与门将判定、赛后成长报告。</p></div>
    <div class="hero-actions"><button id="goTour" class="btn primary">开启世界杯征途</button><button id="goQuick" class="btn blue">快速比赛</button></div>
  </div>
- <div class="notice"><b>V1.3 Beta Sprint 1落实内容：</b>关键回合战术选择、阵容管理、首发/替补、换人、队长与定位球主罚者、体能状态、概率解释、技能条件说明、赛后统计、成长方向、存档版本迁移与自动模拟测试。</div>
+ <div class="notice"><b>V1.3 Beta Sprint 2落实内容：</b>关键回合战术选择、阵容管理、首发/替补、换人、队长与定位球主罚者、体能状态、概率解释、技能条件说明、赛后统计、成长方向、存档版本迁移与自动模拟测试。</div>
  <div class="setup">
    <div class="box"><h3>我的球队</h3><select id="quickA"></select><p id="quickASummary" class="small"></p></div>
    <div class="box"><h3>对手球队</h3><select id="quickB"></select><p id="quickBSummary" class="small"></p></div>
@@ -103,6 +103,10 @@
  <div id="dashboardCards" class="statline"></div>
  <div class="two-col"><div class="box"><h2>最近比赛</h2><div id="recentMatches"></div></div><div class="box"><h2>开发状态</h2><div id="sprintStatus"></div></div></div>
 </section>
+
+<section id="missions" class="panel"><div class="hero-card"><div><div class="eyebrow">FREE PROGRESSION</div><h2>任务与免费经济循环</h2><p>所有奖励通过游玩获得，不存在付费专属能力上限。</p></div><div class="pill">训练成本 <b>120金币</b></div></div><div class="two-col"><div class="box"><h2>每日任务</h2><div id="dailyMissions"></div></div><div class="box"><h2>每周任务</h2><div id="weeklyMissions"></div></div></div><div class="box" style="margin-top:12px"><h2>经济报告</h2><div id="economyReport"></div></div></section>
+<section id="shop" class="panel"><div class="notice"><b>模拟商城：</b>本页面没有真实支付，不会扣款。所有商品仅用于测试兴趣，且与比赛能力完全隔离。</div><div id="shopIntegrity" class="box"></div><div id="shopGrid" class="grid"></div></section>
+<section id="feedback" class="panel"><div class="two-col"><div class="box"><h2>Beta反馈中心</h2><label>总体评分<select id="fbRating"><option>5</option><option>4</option><option>3</option><option>2</option><option>1</option></select></label><label>最喜欢的功能<textarea id="fbFavorite"></textarea></label><label>最难理解的功能<textarea id="fbConfusing"></textarea></label><label>改进建议<textarea id="fbSuggestion"></textarea></label><label>商业模式偏好<select id="fbBusiness"><option>一次性买断</option><option>外观商城</option><option>赛事扩展包</option><option>完全免费</option></select></label><label>商城是否影响公平<select id="fbFairness"><option>没有影响</option><option>有一点担心</option><option>明显影响</option></select></label><button id="saveFeedback" class="btn primary full">保存本地反馈</button></div><div class="box"><h2>导出与复制</h2><button id="exportJson" class="btn full">导出JSON报告</button><button id="exportCsv" class="btn full">导出比赛CSV</button><button id="copyFeedback" class="btn full">复制反馈文本</button><div id="feedbackStatus" class="notice compact">反馈仅保存在本机，不自动上传。</div></div></div></section>
 <section id="coach" class="panel">
  <div class="two-col"><div class="box"><h2>AI教练报告</h2><label>分析球队<select id="coachTeam"></select></label><button id="generateCoach" class="btn primary full">生成教练报告</button></div><div class="box"><h2>报告说明</h2><p>当前采用透明规则型分析，不读取付费状态，也不会暗中修改比赛概率。</p></div></div>
  <div id="coachReport" class="box" style="margin-top:12px">尚未生成报告。</div>
@@ -122,13 +126,13 @@
  </div>
  <div class="box" style="margin-top:12px"><h2>数据与版权说明</h2><p>球员能力属于基于公开表现构建的游戏化评分，不是FIFA、EA或任何官方评分。当前为非商业原型；正式公开发行前需完成赛事名称、球员姓名、肖像、队徽、国旗和数据授权审查。</p></div>
 </section>
-<div class="footer">V1.3 Beta Sprint 1 · Schema 13 · 非商业开发原型 · 本地存档</div>
+<div class="footer">V1.3 Beta Sprint 2 · Schema 13 · 非商业开发原型 · 本地存档</div>
 </div>
 
 <div id="modal" class="modal"><div class="modalbox"><div id="resultTitle" class="result"></div><div id="resultBody"></div><button id="closeModal" class="btn primary full">确定</button></div></div>
 <div id="subModal" class="modal"><div class="modalbox"><div class="result">比赛换人</div><div id="subBody"></div><button id="closeSub" class="btn full">关闭</button></div></div>
-<div id="welcome" class="modal"><div class="modalbox"><div class="result">V1.3 Beta Sprint 1 竞技实验室·架构版</div><p>会议决议已落实：阵容管理、战术选择、换人、体能、概率解释、技能条件、成长方向、赛后分析、存档迁移和模拟实验室。</p><button id="welcomeClose" class="btn primary full">进入游戏</button></div></div>
+<div id="welcome" class="modal"><div class="modalbox"><div class="result">V1.3 Beta Sprint 2 任务经济·商业化隔离版</div><p>会议决议已落实：阵容管理、战术选择、换人、体能、概率解释、技能条件、成长方向、赛后分析、存档迁移和模拟实验室。</p><button id="welcomeClose" class="btn primary full">进入游戏</button></div></div>
 
-<script src="data/players.js"></script><script src="data/teams.js"></script><script src="data/balance.js"></script><script src="data/skills.js"></script><script src="data/combos.js"></script>
-<script src="js/storage.js"></script><script src="js/growthEngine.js"></script><script src="js/lineupEngine.js"></script><script src="js/matchEngine.js"></script><script src="js/tournamentEngine.js"></script><script src="js/render.js"></script><script src="js/simulation.js"></script><script src="js/advancedSimulation.js"></script><script src="js/analyticsEngine.js"></script><script src="js/coachEngine.js"></script><script src="js/app.js"></script>
+<script src="data/players.js"></script><script src="data/economy.js"></script><script src="data/missions.js"></script><script src="data/shopItems.js"></script><script src="data/teams.js"></script><script src="data/balance.js"></script><script src="data/skills.js"></script><script src="data/combos.js"></script>
+<script src="js/storage.js"></script><script src="js/economyEngine.js"></script><script src="js/missionEngine.js"></script><script src="js/shopEngine.js"></script><script src="js/reportExporter.js"></script><script src="js/feedbackEngine.js"></script><script src="js/growthEngine.js"></script><script src="js/lineupEngine.js"></script><script src="js/matchEngine.js"></script><script src="js/tournamentEngine.js"></script><script src="js/render.js"></script><script src="js/simulation.js"></script><script src="js/advancedSimulation.js"></script><script src="js/analyticsEngine.js"></script><script src="js/coachEngine.js"></script><script src="js/app.js"></script>
 </body></html>
