@@ -4,20 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#07140d">
-<title>绿茵牌阵：世界杯征途 V1.5.0</title>
+<title>绿茵牌阵：世界杯征途 V1.6 RC2</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div class="app">
 <header class="top hero-top">
-  <div class="brand"><div class="eyebrow">TACTICAL CARD FOOTBALL</div><h1>⚽ 绿茵牌阵：世界杯征途</h1><p>V1.5.0 · 三轨联合验证版</p></div>
-  <div class="currency"><span class="pill">💰 <b id="coins">0</b></span><span class="pill">🏆 <b id="wins">0</b></span><span class="pill">🛡️ Schema 21</span></div>
+  <div class="brand"><div class="eyebrow">TACTICAL CARD FOOTBALL</div><h1>⚽ 绿茵牌阵：世界杯征途</h1><p>V1.6 RC2 · Dynamic Tactics</p></div>
+  <div class="currency"><span class="pill">💰 <b id="coins">0</b></span><span class="pill">🏆 <b id="wins">0</b></span><span class="pill">🛡️ Schema 22</span></div>
 </header>
 <nav class="tabs">
 <button class="active" data-tab="home">大厅</button>
 <button data-tab="squad">国家队管理</button>
 <button data-tab="match">比赛中心</button>
-<button data-tab="tour">世界杯征途</button>
+<button data-tab="tour">世界杯征途</button><button data-tab="dynamic">动态战术2.0</button>
 <button class="advanced-tab" data-tab="players">球员卡册</button>
 <button class="advanced-tab" data-tab="train">训练中心</button>
 <button class="advanced-tab" data-tab="dashboard">数据驾驶舱</button><button class="advanced-tab" data-tab="missions">任务中心</button><button class="advanced-tab" data-tab="shop">模拟商城</button><button class="advanced-tab" data-tab="coach">AI教练</button><button class="advanced-tab" data-tab="lab">竞技实验室</button><button class="advanced-tab" data-tab="feedback">Beta反馈</button>
@@ -31,7 +31,7 @@
    <div><div class="eyebrow">牌阵 · 连携 · 征途</div><h2>每一次出牌，都是一段真实攻防</h2><p>随机1—3人局部对抗、玩家战术决策、阵型影响、个人技能、组合技能、两阶段射门与门将判定、赛后成长报告。</p></div>
    <div class="hero-actions"><button id="goTour" class="btn primary">开启世界杯征途</button><button id="goQuick" class="btn blue">快速比赛</button></div>
  </div>
- <div class="notice beta-banner"><b>V1.5.0 三轨联合验证版：</b>四个开发阶段已完成整合，正式形成核心稳定性、赛场演出、AI与数值诊断、内容治理及版本历史中心。<br><b>重要说明：</b>本产品仍为非官方、非商业、单机网页开发版；模拟商城不产生真实交易，球员评分属于游戏化评分。</div>
+ <div class="notice beta-banner"><b>V1.6 RC2 动态战术候选版：</b>四个开发阶段已完成整合，正式形成核心稳定性、赛场演出、AI与数值诊断、内容治理及版本历史中心。<br><b>重要说明：</b>本产品仍为非官方、非商业、单机网页开发版；模拟商城不产生真实交易，球员评分属于游戏化评分。</div>
  <div class="setup">
    <div class="box"><h3>我的球队</h3><select id="quickA"></select><p id="quickASummary" class="small"></p></div>
    <div class="box"><h3>对手球队</h3><select id="quickB"></select><p id="quickBSummary" class="small"></p></div>
@@ -78,6 +78,28 @@
   <details class="match-drawer"><summary>关键事件与详细数据</summary><div class="timeline-title">关键事件时间轴</div><div id="matchLog" class="log timeline"><div>比赛日志将在这里显示。</div></div><div id="liveEventStats" class="live-event-stats"></div></details>
   <div class="controls"><button type="button" class="btn primary" id="nextRound" aria-live="polite">生成下一回合</button><button class="btn blue" id="autoFinish">智能托管</button><button class="btn danger" id="resetMatch">退出本场</button></div>
  </div>
+</section>
+
+
+<section id="dynamic" class="panel">
+ <div class="hero-card dynamic-hero"><div><div class="eyebrow">DYNAMIC TACTICS 2.0</div><h2>他会读懂你的战术——除非，你先骗过他</h2><p>10个比赛回合中只出现3—5个关键战术时刻。观察多义信号、坚持或变招，并用真实球员牌阵击败会学习的AI教练。</p></div><div class="pill">独立实验存档 · 不影响世界杯</div></div>
+ <div class="dynamic-setup box">
+  <label>我的球队<select id="dtTeam"></select></label>
+  <label>AI人格<select id="dtPersona"><option value="wall">铁壁教头</option><option value="press">狂热压迫者</option></select></label>
+  <label>难度<select id="dtDifficulty"><option value="rookie">新手</option><option value="standard" selected>标准</option><option value="expert">高手</option></select></label>
+  <button id="dtStart" class="btn primary">开始动态战术比赛</button><button id="dtClear" class="btn danger">清除实验数据</button>
+ </div>
+ <div id="dtGame" class="dynamic-game hidden">
+  <div class="dt-score"><b id="dtTeamA">我方</b> <strong id="dtScoreA">0</strong> — <strong id="dtScoreB">0</strong> <b id="dtTeamB">AI</b><span id="dtClock">0′</span></div>
+  <div id="dtStatus" class="notice compact">等待比赛开始。</div>
+  <div id="dtSignal" class="dt-signal"></div>
+  <div class="dt-duel"><div id="dtCardsA" class="dt-cards"></div><div class="vs">VS</div><div id="dtCardsB" class="dt-cards"></div></div>
+  <div id="dtTactics" class="dt-tactics"></div>
+  <div id="dtSecond" class="dt-second hidden"><p><b>对手意图已经出现。</b>坚持原计划，或承担转换成本进行变招。</p><div id="dtSwitches" class="dt-tactics"></div></div>
+  <div class="controls"><button id="dtContinue" class="btn primary hidden">继续下一回合</button><button id="dtWhy" class="btn">为什么？</button><button id="dtExit" class="btn danger">退出实验</button></div>
+  <details id="dtExplain"><summary>详细结算与AI公平审计</summary><div id="dtLog" class="log timeline"></div></details>
+ </div>
+ <div id="dtReview" class="box hidden"></div>
 </section>
 
 <section id="tour" class="panel">
@@ -158,5 +180,5 @@
 <div id="welcome" class="modal"><div class="modalbox"><div class="result">V1.5.0 三轨联合验证版</div><p><b>本次重点：</b>P0-A比赛一屏决策、P0-B世界杯赛事统计与赛后报告、P0-C防守反击链实验场已按顺序完成并联合整合。旧版Schema 21存档可继续使用。</p><p class="small">当前为非官方、非商业、单机网页开发版，不含真实支付。</p><button id="welcomeClose" class="btn primary full">进入游戏</button></div></div>
 
 <script src="data/players.js"></script><script src="data/versionHistory.js"></script><script src="data/contentGovernance.js"></script><script src="data/betaReleaseConfig.js"></script><script src="data/betaConfig.js"></script><script src="data/economy.js"></script><script src="data/missions.js"></script><script src="data/shopItems.js"></script><script src="data/teams.js"></script><script src="data/balance.js"></script><script src="data/skills.js"></script><script src="data/combos.js"></script>
-<script src="js/storage.js"></script><script src="js/versionHistoryUI.js"></script><script src="js/contentUI.js"></script><script src="js/betaReleaseManager.js"></script><script src="js/tutorialEngine.js"></script><script src="js/betaTools.js"></script><script src="js/economyEngine.js"></script><script src="js/missionEngine.js"></script><script src="js/shopEngine.js"></script><script src="js/reportExporter.js"></script><script src="js/feedbackEngine.js"></script><script src="js/growthEngine.js"></script><script src="js/lineupEngine.js"></script><script src="js/matchEngine.js"></script><script src="js/tournamentEngine.js"></script><script src="js/render.js"></script><script src="js/simulation.js"></script><script src="js/advancedSimulation.js"></script><script src="js/balanceValidator.js"></script><script src="js/betaQAEngine.js"></script><script src="js/analyticsEngine.js"></script><script src="js/coachEngine.js"></script><script src="js/diagnosticsEngine.js"></script><script src="js/diagnosticsUI.js"></script><script src="js/app.js"></script><script src="js/sprint3.js"></script><script src="js/betaReleaseUI.js"></script>
+<script src="js/storage.js"></script><script src="js/dynamicTacticsEngine.js"></script><script src="js/dynamicTacticsUI.js"></script><script src="js/versionHistoryUI.js"></script><script src="js/contentUI.js"></script><script src="js/betaReleaseManager.js"></script><script src="js/tutorialEngine.js"></script><script src="js/betaTools.js"></script><script src="js/economyEngine.js"></script><script src="js/missionEngine.js"></script><script src="js/shopEngine.js"></script><script src="js/reportExporter.js"></script><script src="js/feedbackEngine.js"></script><script src="js/growthEngine.js"></script><script src="js/lineupEngine.js"></script><script src="js/matchEngine.js"></script><script src="js/tournamentEngine.js"></script><script src="js/render.js"></script><script src="js/simulation.js"></script><script src="js/advancedSimulation.js"></script><script src="js/balanceValidator.js"></script><script src="js/betaQAEngine.js"></script><script src="js/analyticsEngine.js"></script><script src="js/coachEngine.js"></script><script src="js/diagnosticsEngine.js"></script><script src="js/diagnosticsUI.js"></script><script src="js/app.js"></script><script src="js/sprint3.js"></script><script src="js/betaReleaseUI.js"></script>
 </body></html>
