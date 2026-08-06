@@ -1,32 +1,124 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
-<title>世界杯·绿茵牌阵 V1.1 战术三牌版</title>
-<link rel="stylesheet" href="css/style.css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#07140d">
+<title>绿茵牌阵：世界杯征途 V1.2 Alpha+</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div class="app">
-<header class="top"><div class="brand"><h1>⚽ 世界杯·绿茵牌阵</h1><p>World Cup Card Master · V1.1 战术三牌版</p></div><div class="currency"><span class="pill">💰 <b id="coins">0</b></span><span class="pill">🏆 <b id="wins">0</b></span><span class="pill">Tactical Trio Engine</span></div></header>
-<nav class="tabs"><button class="active" data-tab="home">大厅</button><button data-tab="match">比赛中心</button><button data-tab="tour">世界杯征途</button><button data-tab="players">球员卡册</button><button data-tab="train">训练中心</button><button data-tab="rules">规则说明</button></nav>
+<header class="top hero-top">
+  <div class="brand"><div class="eyebrow">TACTICAL CARD FOOTBALL</div><h1>⚽ 绿茵牌阵：世界杯征途</h1><p>V1.2 Alpha+ · 战术指挥官版</p></div>
+  <div class="currency"><span class="pill">💰 <b id="coins">0</b></span><span class="pill">🏆 <b id="wins">0</b></span><span class="pill">📊 Alpha+</span></div>
+</header>
+<nav class="tabs">
+<button class="active" data-tab="home">大厅</button>
+<button data-tab="squad">国家队管理</button>
+<button data-tab="match">比赛中心</button>
+<button data-tab="tour">世界杯征途</button>
+<button data-tab="players">球员卡册</button>
+<button data-tab="train">训练中心</button>
+<button data-tab="lab">数据实验室</button>
+<button data-tab="rules">规则</button>
+</nav>
+
 <section id="home" class="panel active">
-  <div class="notice"><b>V1.1 核心升级：</b>比赛不再固定两张卡对峙，而是随机进入 1v1、2v2、3v3、1v2、2v3 等局部攻防；每回合根据场景、位置、阵型、士气、技能、组合技能和状态波动计算牌阵值，再换算进球概率。</div>
-  <div class="setup"><div class="box"><h3>我的球队</h3><select id="quickA"></select></div><div class="box"><h3>对手球队</h3><select id="quickB"></select></div><div class="box"><h3>快速开始</h3><button id="startQuick" class="btn primary" style="width:100%">开始战术三牌比赛</button><p class="small">已精细录入球队使用球员真实姓名卡组；其他世界杯球队使用强度模拟卡，方便完整跑通赛事。</p></div></div>
-  <div id="homeSummary" class="setup" style="margin-top:12px"></div>
-  <h2>当前首发卡组</h2><div id="squadGrid" class="grid"></div>
+ <div class="hero-card">
+   <div><div class="eyebrow">牌阵 · 连携 · 征途</div><h2>每一次出牌，都是一段真实攻防</h2><p>随机1—3人局部对抗、玩家战术决策、阵型影响、个人技能、组合技能、两阶段射门与门将判定、赛后成长报告。</p></div>
+   <div class="hero-actions"><button id="goTour" class="btn primary">开启世界杯征途</button><button id="goQuick" class="btn blue">快速比赛</button></div>
+ </div>
+ <div class="notice"><b>V1.2 Alpha+落实内容：</b>关键回合战术选择、阵容管理、首发/替补、换人、队长与定位球主罚者、体能状态、概率解释、技能条件说明、赛后统计、成长方向、存档版本迁移与自动模拟测试。</div>
+ <div class="setup">
+   <div class="box"><h3>我的球队</h3><select id="quickA"></select><p id="quickASummary" class="small"></p></div>
+   <div class="box"><h3>对手球队</h3><select id="quickB"></select><p id="quickBSummary" class="small"></p></div>
+   <div class="box"><h3>比赛设置</h3><select id="difficulty"><option value="easy">轻松</option><option value="normal" selected>标准</option><option value="hard">专家</option></select><button id="startQuick" class="btn primary full">开始比赛</button></div>
+ </div>
+ <h2>我的首发</h2><div id="squadGrid" class="grid"></div>
 </section>
+
+<section id="squad" class="panel">
+ <div class="two-col">
+  <div class="box"><h2>国家队管理</h2>
+   <label>球队<select id="manageTeam"></select></label>
+   <label>阵型<select id="manageFormation"></select></label>
+   <label>队长<select id="captainSelect"></select></label>
+   <label>定位球主罚者<select id="setPieceSelect"></select></label>
+   <div id="formationDescription" class="notice compact"></div>
+  </div>
+  <div class="box"><h2>连携预览</h2><div id="comboPreview"></div></div>
+ </div>
+ <div class="lineup-columns">
+   <div><h3>首发11人 <span class="small">点击球员可与替补互换</span></h3><div id="starterList" class="lineup-list"></div></div>
+   <div><h3>替补席</h3><div id="benchList" class="lineup-list"></div></div>
+ </div>
+</section>
+
 <section id="match" class="panel">
-  <div class="setup"><div class="box"><h3>阵型调整</h3><div class="setup"><select id="applyFormationA"><option>4-3-3</option><option>4-2-3-1</option><option>4-3-1-2</option><option>3-4-3</option><option>3-5-2</option><option>5-4-1</option><option>5-3-2</option><option>4-4-2</option><option>4-2-2-2</option><option>4-5-1</option></select><select id="applyFormationB"><option>4-3-3</option><option>4-2-3-1</option><option>4-3-1-2</option><option>3-4-3</option><option>3-5-2</option><option>5-4-1</option><option>5-3-2</option><option>4-4-2</option><option>4-2-2-2</option><option>4-5-1</option></select></div></div></div>
-  <div class="pitch"><div class="scoreboard"><span id="scoreNameA">A</span> <b id="scoreA">0</b> — <b id="scoreB">0</b> <span id="scoreNameB">B</span><div class="small">第 <span id="round">0</span>/<span id="maxRound">15</span> 回合 · 士气 <span id="moraleA">50</span> / <span id="moraleB">50</span></div></div><div id="sceneInfo" class="scene">请先从大厅或世界杯征途开始比赛。</div><div class="battle"><div class="duel" id="duelA">等待比赛</div><div class="vs">VS</div><div class="duel" id="duelB">等待比赛</div></div><div id="matchLog" class="log"><div>比赛日志将在这里显示。</div></div><div class="controls"><button class="btn primary" id="nextRound">翻开下一回合</button><button class="btn blue" id="autoFinish">自动完成本场</button><button class="btn danger" id="resetMatch">重置比赛</button></div></div>
+ <div class="match-toolbar">
+  <span class="stage-badge" id="matchMode">未开始</span>
+  <span class="stage-badge">难度 <b id="matchDifficulty">标准</b></span>
+  <button id="openSub" class="btn">换人</button>
+ </div>
+ <div class="pitch">
+  <div class="scoreboard"><span id="scoreNameA">A</span> <b id="scoreA">0</b> — <b id="scoreB">0</b> <span id="scoreNameB">B</span>
+   <div class="small"><span id="minute">0'</span> · 回合 <span id="round">0</span>/<span id="maxRound">15</span> · 士气 <span id="moraleA">50</span>/<span id="moraleB">50</span></div>
+  </div>
+  <div class="fitness-row"><div id="fitnessA"></div><div id="fitnessB"></div></div>
+  <div id="sceneInfo" class="scene">请先开始比赛。</div>
+  <div id="tacticPanel" class="tactic-panel hidden">
+   <h3>战术指挥</h3><p class="small">根据当前场景选择策略。不同策略会改变能力权重、体能消耗、射门倾向与反击风险。</p>
+   <div id="tacticChoices" class="tactic-grid"></div>
+  </div>
+  <div class="battle"><div class="duel" id="duelA">等待比赛</div><div class="vs">VS</div><div class="duel" id="duelB">等待比赛</div></div>
+  <div id="probExplain" class="explain-card"><b>概率解释：</b>下一回合结算后显示。</div>
+  <div id="matchLog" class="log"><div>比赛日志将在这里显示。</div></div>
+  <div class="controls"><button class="btn primary" id="nextRound">生成下一回合</button><button class="btn blue" id="autoFinish">智能托管</button><button class="btn danger" id="resetMatch">退出本场</button></div>
+ </div>
 </section>
-<section id="tour" class="panel"><div class="notice">世界杯征途采用 48 队、12 组、每组 4 队、小组前两名与 8 个最好小组第三晋级 32 强的结构。V1.1 已实现小组积分、最好第三名、淘汰赛、点球大战与冠军结算；淘汰赛对阵为游戏化种子模拟，后续可继续替换为完整官方晋级路径。</div><div class="setup"><div class="box"><h3>选择征途球队</h3><select id="tourTeam"></select><div id="tourPreview" style="margin-top:10px"></div><button id="startTour" class="btn primary" style="width:100%;margin-top:10px">开启世界杯征途</button></div><div class="box"><h3>下一步</h3><button id="tourNext" class="btn blue" style="width:100%">进行下一场征途比赛</button><p class="small">小组赛每场需要进入比赛中心完成。其他比赛由系统自动模拟。</p></div></div><div id="tourState" style="margin-top:12px"></div></section>
-<section id="players" class="panel"><div class="radar-wrap"><canvas id="radar" class="radar" width="460" height="460"></canvas><div id="playerDetail" class="detail"><h2>球员雷达图</h2><p>点击球员卡查看六维雷达图、技能与成长等级。</p></div></div><div class="setup" style="margin:12px 0"><div class="box"><h3>筛选</h3><select id="filterTeam"></select><label class="small"><input type="checkbox" id="detailOnly" checked> 只看精细球员卡</label><p class="small">当前显示 <b id="playerCount">0</b> 张卡。</p></div></div><div id="playerGrid" class="grid"></div></section>
-<section id="train" class="panel"><div class="notice">比赛获得经验与金币。训练会永久提升球员随机能力，并写入本机浏览器存档；升级数据会带入下一场比赛和世界杯征途。</div><div id="upgradeGrid" class="grid"></div><div style="margin-top:12px"><button id="wipeSave" class="btn danger">清除全部存档</button></div></section>
-<section id="rules" class="panel"><div class="two-col"><div class="box"><h2>战术三牌引擎规则</h2><p>每回合先抽取比赛场景，再决定双方 1–3 张牌参战。团队牌阵值由主将、副将、第三人、技能、组合技能、阵型、士气、体能和随机状态构成。</p><div class="statline"><div class="mini">主将<br><b>1.00</b></div><div class="mini">副将<br><b>0.65</b></div><div class="mini">第三人<br><b>0.45</b></div><div class="mini">比赛回合<br><b>15</b></div></div><p class="small">优势差越大，进球概率越高；但足球保留不确定性，强队不会每次必进，弱队也可能通过反击、定位球和点球制造冷门。</p></div><div class="box"><h2>组合技能</h2><p>同场出现特定球星或位置组合时，会触发组合技能。</p><p class="small">例如：法国闪电双翼、阿根廷灵魂连线、挪威重炮体系、西班牙青春风暴、双中卫铁闸、门神屏障、黄金三角、绝境总攻等。</p></div></div><div class="box" style="margin-top:12px"><h2>V1.1 数据口径</h2><p>本版本继承 V1.0 的 8 支精细球队和 88 名球员卡，新增 48 队世界杯征途结构。暂未精细录入的球队使用球队强度和模拟卡运行完整赛制，后续 V1.2/V1.5 可逐步补齐更多球队真实球员卡。</p></div></section>
-<div class="footer">非商业原型。球队、赛事及球员姓名权利归各自权利人所有；能力值为游戏化评分，不代表官方评分或现实预测。</div>
+
+<section id="tour" class="panel">
+ <div class="notice">采用48队、12组、每组4队的赛事结构；小组前两名与8个成绩最好的第三名晋级32强。小组赛、淘汰赛、加时和点球大战均可完成并保存。</div>
+ <div class="setup"><div class="box"><h3>选择球队</h3><select id="tourTeam"></select><div id="tourPreview"></div><button id="startTour" class="btn primary full">新建世界杯征途</button></div>
+ <div class="box"><h3>赛事行动</h3><button id="tourNext" class="btn blue full">进行下一场</button><button id="resumeTour" class="btn full">继续现有征途</button></div></div>
+ <div id="tourState"></div>
+</section>
+
+<section id="players" class="panel">
+ <div class="radar-wrap"><canvas id="radar" class="radar" width="460" height="460"></canvas><div id="playerDetail" class="detail"><h2>球员雷达图</h2><p>点击球员卡查看能力、技能条件、等级、经验和当前成长。</p></div></div>
+ <div class="setup"><div class="box"><h3>筛选</h3><select id="filterTeam"></select><label class="small"><input type="checkbox" id="detailOnly" checked>只看精细球员卡</label><p class="small">当前显示 <b id="playerCount">0</b> 张卡。</p></div></div>
+ <div id="playerGrid" class="grid"></div>
+</section>
+
+<section id="train" class="panel">
+ <div class="notice">训练改为可选择成长方向。高能力球员成长成本更高且提升更慢，避免后期无限膨胀。</div>
+ <div class="setup"><div class="box"><h3>训练方向</h3><select id="trainFocus"><option value="0">速度</option><option value="1">射门</option><option value="2">传球</option><option value="3">盘带</option><option value="4">防守</option><option value="5">身体</option></select><p class="small">每次训练消耗金币，并增加少量经验。</p></div></div>
+ <div id="upgradeGrid" class="grid"></div><button id="wipeSave" class="btn danger">清除全部存档</button>
+</section>
+
+<section id="lab" class="panel">
+ <div class="two-col">
+  <div class="box"><h2>自动模拟测试</h2><p>用于Alpha阶段平衡检查，不影响正式存档。</p><label>模拟场次<select id="simCount"><option>100</option><option selected>1000</option><option>5000</option></select></label><button id="runSimulation" class="btn primary full">运行模拟</button></div>
+  <div class="box"><h2>技术状态</h2><div id="techStatus"></div></div>
+ </div>
+ <div id="simulationResult" class="box" style="margin-top:12px">尚未运行模拟。</div>
+</section>
+
+<section id="rules" class="panel">
+ <div class="two-col">
+  <div class="box"><h2>核心结算</h2><p>场景生成 → 1—3人牌阵 → 玩家战术 → 技能与连携 → 形成射门概率 → 门将二次判定 → 剧情结果。</p><p class="small">主将100%、副将65%、第三人45%，多人优势递减，避免三张牌必胜。</p></div>
+  <div class="box"><h2>透明概率</h2><p>每回合显示基础机会、牌阵差、战术、技能、阵型、士气、体能和门将影响，玩家可查看“为什么赢/为什么没进”。</p></div>
+ </div>
+ <div class="box" style="margin-top:12px"><h2>数据与版权说明</h2><p>球员能力属于基于公开表现构建的游戏化评分，不是FIFA、EA或任何官方评分。当前为非商业原型；正式公开发行前需完成赛事名称、球员姓名、肖像、队徽、国旗和数据授权审查。</p></div>
+</section>
+<div class="footer">V1.2 Alpha+ · 非商业开发原型 · 本地存档</div>
 </div>
-<div id="modal" class="modal"><div class="modalbox"><div id="resultTitle" class="result"></div><div id="resultBody"></div><button id="closeModal" class="btn primary" style="width:100%;margin-top:14px">确定</button></div></div>
-<div id="welcome" class="modal"><div class="modalbox"><div class="result">V1.1 战术三牌版</div><p>本次重点升级：战术三牌引擎、1–3 张牌局部攻防、组合技能、阵型影响、世界杯征途、小组积分、最好第三名、淘汰赛、点球大战、成长继承。</p><button id="welcomeClose" class="btn primary" style="width:100%">进入游戏</button></div></div>
-<script src="data/players.js"></script><script src="data/teams.js"></script><script src="data/balance.js"></script><script src="data/skills.js"></script><script src="data/combos.js"></script><script src="js/storage.js"></script><script src="js/growthEngine.js"></script><script src="js/matchEngine.js"></script><script src="js/tournamentEngine.js"></script><script src="js/render.js"></script><script src="js/app.js"></script>
+
+<div id="modal" class="modal"><div class="modalbox"><div id="resultTitle" class="result"></div><div id="resultBody"></div><button id="closeModal" class="btn primary full">确定</button></div></div>
+<div id="subModal" class="modal"><div class="modalbox"><div class="result">比赛换人</div><div id="subBody"></div><button id="closeSub" class="btn full">关闭</button></div></div>
+<div id="welcome" class="modal"><div class="modalbox"><div class="result">V1.2 Alpha+ 战术指挥官版</div><p>会议决议已落实：阵容管理、战术选择、换人、体能、概率解释、技能条件、成长方向、赛后分析、存档迁移和模拟实验室。</p><button id="welcomeClose" class="btn primary full">进入游戏</button></div></div>
+
+<script src="data/players.js"></script><script src="data/teams.js"></script><script src="data/balance.js"></script><script src="data/skills.js"></script><script src="data/combos.js"></script>
+<script src="js/storage.js"></script><script src="js/growthEngine.js"></script><script src="js/lineupEngine.js"></script><script src="js/matchEngine.js"></script><script src="js/tournamentEngine.js"></script><script src="js/render.js"></script><script src="js/simulation.js"></script><script src="js/app.js"></script>
 </body></html>

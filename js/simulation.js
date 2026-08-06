@@ -1,0 +1,4 @@
+(function(){
+ function run(n){let teams=Object.values(WORLD_CUP_GROUPS).flat(),goals=0,draws=0,strongWins=0,upsets=0,results={};for(let i=0;i<n;i++){let a=teams[Math.floor(Math.random()*teams.length)],b;do{b=teams[Math.floor(Math.random()*teams.length)]}while(a===b);let r=MatchEngine.simulateScore(a,b),sa=Growth.strengthOf(a),sb=Growth.strengthOf(b);goals+=r.a+r.b;if(r.a===r.b)draws++;let strong=sa>=sb?a:b,win=r.a===r.b?'draw':(r.a>r.b?a:b);if(win===strong)strongWins++;if(Math.abs(sa-sb)>=8&&win!=='draw'&&win!==strong)upsets++;results[`${r.a}-${r.b}`]=(results[`${r.a}-${r.b}`]||0)+1}let top=Object.entries(results).sort((x,y)=>y[1]-x[1]).slice(0,8);return {n,avg:(goals/n).toFixed(2),draw:(draws/n*100).toFixed(1),strong:(strongWins/n*100).toFixed(1),upset:(upsets/n*100).toFixed(1),top}}
+ window.Simulation={run};
+})();
