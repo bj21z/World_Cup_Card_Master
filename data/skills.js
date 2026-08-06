@@ -1,0 +1,4 @@
+
+window.SKILL_KEYWORDS = [
+ {match:'闪电',prefer:['速度'],bonus:8,text:'速度爆发'}, {match:'终结',prefer:['射门'],bonus:9,text:'终结加成'}, {match:'重炮',prefer:['射门','身体'],bonus:9,text:'重炮压制'}, {match:'头槌',prefer:['身体','射门'],bonus:8,text:'空中制霸'}, {match:'球王',prefer:['传球','盘带','射门'],bonus:10,text:'球王时刻'}, {match:'任意球',prefer:['传球','射门'],bonus:8,text:'定位球大师'}, {match:'门神',prefer:['防守'],bonus:10,text:'门神降临'}, {match:'门线',prefer:['防守'],bonus:10,text:'门线统治'}, {match:'制导',prefer:['传球'],bonus:8,text:'精准制导'}, {match:'机会',prefer:['传球','射门'],bonus:8,text:'机会制造'}, {match:'空间',prefer:['传球','盘带'],bonus:8,text:'空间魔术'}, {match:'大师',prefer:['传球'],bonus:8,text:'大师节拍'}, {match:'双足',prefer:['盘带','射门'],bonus:8,text:'双足幻舞'}, {match:'王者',prefer:['射门','身体','传球'],bonus:9,text:'王者后插上'}, {match:'禁区',prefer:['射门'],bonus:8,text:'禁区猎手'}, {match:'压迫',prefer:['防守','速度'],bonus:7,text:'全场压迫'}
+];
