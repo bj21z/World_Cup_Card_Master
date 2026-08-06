@@ -1,16 +1,23 @@
-# V1.3 Beta Sprint 2 版本说明
+# V1.3 Beta Sprint 3 版本说明
 
-## 新增
-- Schema 14存档迁移
-- 每日/每周任务与免费金币奖励
-- 经济流水和免费成长报告
-- 模拟商城与商品兴趣记录
-- 商品与比赛能力隔离检查
-- JSON/CSV导出
-- Beta反馈中心
+## 相比Sprint 2新增
+- 新增 `data/betaConfig.js`
+- 新增 `js/betaQAEngine.js`
+- 新增 `js/balanceValidator.js`
+- 新增 `js/sprint3.js`
+- 新增Beta验收页面
+- 存档由Schema 14升级至15
+- 新增平衡预警与Beta门槛
 
-## 保持不变
-V1.2及Sprint 1的比赛、阵容、世界杯、成长、驾驶舱、AI教练、矩阵模拟全部保留。
+## 修改文件
+- index.html
+- css/style.css
+- js/storage.js
+- README.md
+- VERSION_NOTES.md
 
-## 未加入
-真实支付、付费抽卡、账号、云存档、联网PVP。
+## 删除文件
+无。
+
+## 是否全量替换
+是。部署时全量替换，不要只上传新增文件。
