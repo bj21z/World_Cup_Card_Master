@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#07140d">
-<title>绿茵牌阵：世界杯征途 V1.4.0</title>
+<title>绿茵牌阵：世界杯征途 V1.5.0</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div class="app">
 <header class="top hero-top">
-  <div class="brand"><div class="eyebrow">TACTICAL CARD FOOTBALL</div><h1>⚽ 绿茵牌阵：世界杯征途</h1><p>V1.4.0 · 赛场焕新版</p></div>
+  <div class="brand"><div class="eyebrow">TACTICAL CARD FOOTBALL</div><h1>⚽ 绿茵牌阵：世界杯征途</h1><p>V1.5.0 · 三轨联合验证版</p></div>
   <div class="currency"><span class="pill">💰 <b id="coins">0</b></span><span class="pill">🏆 <b id="wins">0</b></span><span class="pill">🛡️ Schema 21</span></div>
 </header>
 <nav class="tabs">
@@ -31,7 +31,7 @@
    <div><div class="eyebrow">牌阵 · 连携 · 征途</div><h2>每一次出牌，都是一段真实攻防</h2><p>随机1—3人局部对抗、玩家战术决策、阵型影响、个人技能、组合技能、两阶段射门与门将判定、赛后成长报告。</p></div>
    <div class="hero-actions"><button id="goTour" class="btn primary">开启世界杯征途</button><button id="goQuick" class="btn blue">快速比赛</button></div>
  </div>
- <div class="notice beta-banner"><b>V1.4.0 赛场焕新版：</b>四个开发阶段已完成整合，正式形成核心稳定性、赛场演出、AI与数值诊断、内容治理及版本历史中心。<br><b>重要说明：</b>本产品仍为非官方、非商业、单机网页开发版；模拟商城不产生真实交易，球员评分属于游戏化评分。</div>
+ <div class="notice beta-banner"><b>V1.5.0 三轨联合验证版：</b>四个开发阶段已完成整合，正式形成核心稳定性、赛场演出、AI与数值诊断、内容治理及版本历史中心。<br><b>重要说明：</b>本产品仍为非官方、非商业、单机网页开发版；模拟商城不产生真实交易，球员评分属于游戏化评分。</div>
  <div class="setup">
    <div class="box"><h3>我的球队</h3><select id="quickA"></select><p id="quickASummary" class="small"></p></div>
    <div class="box"><h3>对手球队</h3><select id="quickB"></select><p id="quickBSummary" class="small"></p></div>
@@ -61,7 +61,7 @@
  <div class="match-toolbar">
   <span class="stage-badge" id="matchMode">未开始</span><span class="match-phase" id="matchPhase" data-phase="idle">等待开赛</span>
   <span class="stage-badge">难度 <b id="matchDifficulty">标准</b></span>
-  <button id="openSub" class="btn">换人</button>
+  <button id="openSub" class="btn">换人</button><label class="experiment-toggle"><input id="counterLabToggle" type="checkbox"> P0-C反击实验</label>
  </div>
  <div class="pitch" id="matchPitch"><div id="eventOverlay" class="event-overlay" aria-live="polite"></div>
   <div class="scoreboard"><span id="scoreNameA">A</span> <b id="scoreA">0</b> — <b id="scoreB">0</b> <span id="scoreNameB">B</span>
@@ -75,7 +75,7 @@
   </div>
   <div class="battle"><div class="duel" id="duelA">等待比赛</div><div class="vs">VS</div><div class="duel" id="duelB">等待比赛</div></div>
   <div id="probExplain" class="explain-card"><b>概率解释：</b>下一回合结算后显示。</div>
-  <div class="timeline-title">关键事件时间轴</div><div id="matchLog" class="log timeline"><div>比赛日志将在这里显示。</div></div>
+  <details class="match-drawer"><summary>关键事件与详细数据</summary><div class="timeline-title">关键事件时间轴</div><div id="matchLog" class="log timeline"><div>比赛日志将在这里显示。</div></div><div id="liveEventStats" class="live-event-stats"></div></details>
   <div class="controls"><button type="button" class="btn primary" id="nextRound" aria-live="polite">生成下一回合</button><button class="btn blue" id="autoFinish">智能托管</button><button class="btn danger" id="resetMatch">退出本场</button></div>
  </div>
 </section>
@@ -84,7 +84,7 @@
  <div class="notice">采用48队、12组、每组4队的赛事结构；小组前两名与8个成绩最好的第三名晋级32强。小组赛、淘汰赛、加时和点球大战均可完成并保存。</div>
  <div class="setup"><div class="box"><h3>选择球队</h3><select id="tourTeam"></select><div id="tourPreview"></div><button id="startTour" class="btn primary full">新建世界杯征途</button></div>
  <div class="box"><h3>赛事行动</h3><button id="tourNext" class="btn blue full">进行下一场</button><button id="resumeTour" class="btn full">继续现有征途</button></div></div>
- <div id="tourState"></div>
+ <div id="tourState"></div><div id="tourStats"></div>
 </section>
 
 <section id="players" class="panel">
@@ -155,7 +155,7 @@
 <div id="modal" class="modal"><div class="modalbox"><div id="resultTitle" class="result"></div><div id="resultBody"></div><button id="closeModal" class="btn primary full">确定</button></div></div>
 <div id="subModal" class="modal"><div class="modalbox"><div class="result">比赛换人</div><div id="subBody"></div><button id="closeSub" class="btn full">关闭</button></div></div>
 <div id="tutorialModal" class="modal"><div class="modalbox tutorial-box"><span id="tutorialStep" class="stage-badge"></span><div id="tutorialTitle" class="result"></div><p id="tutorialBody"></p><div class="controls"><button id="tutorialSkip" class="btn">跳过教学</button><button id="tutorialNext" class="btn primary">下一步</button></div></div></div>
-<div id="welcome" class="modal"><div class="modalbox"><div class="result">V1.4.0 赛场焕新版</div><p><b>本次重点：</b>首页与比赛稳定性、1—3人牌阵演出、球星及组合技能反馈、AI与数值诊断、内容治理、版本历史中心全部完成整合。旧版Schema 21存档可继续使用。</p><p class="small">当前为非官方、非商业、单机网页开发版，不含真实支付。</p><button id="welcomeClose" class="btn primary full">进入游戏</button></div></div>
+<div id="welcome" class="modal"><div class="modalbox"><div class="result">V1.5.0 三轨联合验证版</div><p><b>本次重点：</b>P0-A比赛一屏决策、P0-B世界杯赛事统计与赛后报告、P0-C防守反击链实验场已按顺序完成并联合整合。旧版Schema 21存档可继续使用。</p><p class="small">当前为非官方、非商业、单机网页开发版，不含真实支付。</p><button id="welcomeClose" class="btn primary full">进入游戏</button></div></div>
 
 <script src="data/players.js"></script><script src="data/versionHistory.js"></script><script src="data/contentGovernance.js"></script><script src="data/betaReleaseConfig.js"></script><script src="data/betaConfig.js"></script><script src="data/economy.js"></script><script src="data/missions.js"></script><script src="data/shopItems.js"></script><script src="data/teams.js"></script><script src="data/balance.js"></script><script src="data/skills.js"></script><script src="data/combos.js"></script>
 <script src="js/storage.js"></script><script src="js/versionHistoryUI.js"></script><script src="js/contentUI.js"></script><script src="js/betaReleaseManager.js"></script><script src="js/tutorialEngine.js"></script><script src="js/betaTools.js"></script><script src="js/economyEngine.js"></script><script src="js/missionEngine.js"></script><script src="js/shopEngine.js"></script><script src="js/reportExporter.js"></script><script src="js/feedbackEngine.js"></script><script src="js/growthEngine.js"></script><script src="js/lineupEngine.js"></script><script src="js/matchEngine.js"></script><script src="js/tournamentEngine.js"></script><script src="js/render.js"></script><script src="js/simulation.js"></script><script src="js/advancedSimulation.js"></script><script src="js/balanceValidator.js"></script><script src="js/betaQAEngine.js"></script><script src="js/analyticsEngine.js"></script><script src="js/coachEngine.js"></script><script src="js/diagnosticsEngine.js"></script><script src="js/diagnosticsUI.js"></script><script src="js/app.js"></script><script src="js/sprint3.js"></script><script src="js/betaReleaseUI.js"></script>
