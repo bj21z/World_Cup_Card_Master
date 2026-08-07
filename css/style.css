@@ -105,3 +105,13 @@ body:not(.show-advanced) .tabs .advanced-tab{display:none}
 @media(max-width:900px){.command-grid{grid-template-columns:1fr 1fr}.command-copy h2{font-size:31px}}
 @media(max-width:600px){.command-header{padding:15px 13px}.command-currency{display:grid;grid-template-columns:repeat(3,auto);gap:6px}.command-currency .pill{padding:7px 9px}.command-hero{grid-template-columns:1fr;padding:20px}.command-copy h2{font-size:29px}.command-emblem{display:none}.command-grid{grid-template-columns:1fr 1fr;gap:8px}.command-card{min-height:152px;padding:13px}.command-value{font-size:19px}.release-strip{display:block}.release-strip span{display:block;margin-top:6px}.primary-tabs{overflow-x:auto;display:flex!important;white-space:nowrap}.primary-tabs button{flex:0 0 auto}.v18-score-line{font-size:22px}.v18-clock strong{font-size:28px}}
 @media(max-width:410px){.command-grid{grid-template-columns:1fr}.command-card{min-height:auto}.command-copy h2{font-size:26px}}
+
+.mi-panel{margin:12px 0;padding:14px 16px;border:1px solid rgba(244,196,74,.42);border-radius:20px;background:linear-gradient(135deg,rgba(244,196,74,.10),rgba(7,39,28,.92))}
+.mi-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.mi-top b{font-size:1.05rem;flex:1}.mi-panel p{margin:9px 0;color:var(--muted)}
+.mi-effects{padding-top:9px;border-top:1px solid rgba(255,255,255,.10);font-size:.92rem}.mi-effects span{color:#f5d878}
+
+.stadium-live{margin:12px 0;border:1px solid rgba(118,216,161,.42);background:linear-gradient(180deg,rgba(4,36,25,.96),rgba(3,25,18,.96))}
+.stadium-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.stadium-head h3{margin:3px 0}.live-dot{color:#ffdb63;font-weight:800;letter-spacing:.08em}
+.stadium-atmosphere{padding:10px 0}.stadium-atmosphere i{display:block;height:6px;margin-top:7px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}.stadium-atmosphere i span{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#6fcf97,#f2c94c)}
+.stadium-commentary{max-height:250px;overflow:auto;border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08)}
+.commentary-line{display:grid;grid-template-columns:58px 1fr;gap:8px;padding:9px 2px;border-bottom:1px solid rgba(255,255,255,.055);line-height:1.45}.commentary-line time{font-weight:800;color:#f5d878}.commentary-line.goal span{font-weight:800;color:#ffe08a}.commentary-line.skill span{color:#c7f4d8}.commentary-line.card span{color:#ffd17a}.commentary-line.analysis span{color:#b9d8ff}.commentary-line.finish span{font-weight:800}

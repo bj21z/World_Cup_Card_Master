@@ -1,0 +1,1 @@
+(function(){function ensure(save){save.career=save.career||{trophies:[],classicMatches:[],records:{matches:0,wins:0,goals:0},createdAt:new Date().toISOString()};return save.career}window.CareerLegacy={ensure};})();

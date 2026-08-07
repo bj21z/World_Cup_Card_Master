@@ -1,0 +1,1 @@
+(function(){let mode='balanced';const map={balanced:'平衡',press:'高位压迫',protect:'控险',attack:'强攻'};document.addEventListener('click',e=>{let b=e.target.closest('[data-touchline]');if(!b)return;mode=b.dataset.touchline;let x=document.getElementById('touchlineState');if(x)x.textContent='当前：'+map[mode]+'（下一回合生效）';});window.TacticalTouchline={get:()=>mode,label:()=>map[mode]};})();

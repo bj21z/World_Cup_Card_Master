@@ -1,0 +1,1 @@
+window.FOOTBALL_MODEL={version:'1.0',teamDB:'1.5',dimensions:['position','role','zone','phase','fitness','tacticFit'],guardrails:{maxContextBonus:12,maxContextPenalty:-12},note:'上下文模型修正，不冒充现实官方能力评分'};

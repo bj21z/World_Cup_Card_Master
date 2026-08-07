@@ -1,0 +1,8 @@
+{
+  "js_checked": 50,
+  "js_errors": [],
+  "local_refs": 51,
+  "missing_refs": [],
+  "old_visible_markers": [],
+  "build": "const BUILD_CONFIG=Object.freeze({version:'V2.1',codename:'Match Intelligence',schema:24,storageLabel:'本地存档',releaseType:'比赛智能强化版',build:'2101'});"
+}

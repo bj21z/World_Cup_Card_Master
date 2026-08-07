@@ -7,7 +7,7 @@ const EnduranceEngine={
    const m={teamA:'A队',teamB:'B队',scoreA:0,scoreB:0,minute:0,round:0,moraleA:50,moraleB:50,directorHistory:[]};
    let local=[];
    for(let r=1;r<=15;r++){
-    m.round=r;m.minute=Math.min(90,Math.round(r*6));
+    m.round=r;{const target=r*90/15,jitter=(Math.random()-.5)*3.2,minimum=(m.minute||0)+2;let next=Math.max(minimum,Math.round(target+jitter));if(r>=15)next=Math.max(90,next);m.minute=Math.min(96,next);}
     m.moraleA=Math.max(20,Math.min(80,m.moraleA+(rnd()-.5)*16));m.moraleB=Math.max(20,Math.min(80,m.moraleB+(rnd()-.5)*16));
     if(rnd()<.12){if(rnd()<.5)m.scoreA++;else m.scoreB++;}
     const s=MatchDirector.transition(m);stateCounts[s.key]=(stateCounts[s.key]||0)+1;

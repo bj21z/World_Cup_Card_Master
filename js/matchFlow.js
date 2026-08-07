@@ -1,0 +1,1 @@
+(function(){function state(ms){let m=Number(ms?.minute||0),d=Number(ms?.scoreA||0)-Number(ms?.scoreB||0);let phase=m<20?'开局试探':m<60?'中段争夺':m<78?'胜负转折':'末段决胜';let situation=d===0?'胶着':d>0?'领先':'落后';return {phase,situation,text:`${phase} · ${situation}`}}window.MatchFlow={state};})();
