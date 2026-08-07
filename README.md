@@ -1,3 +1,7 @@
+# 当前构建：V1.7 RC3 · Final Verification最终真机验证版
+
+本包为Alpha 1—4全量发布批准候选版。请优先阅读 `docs/V1.7_RC1_REGRESSION_CHECKLIST.md`。
+
 # 绿茵牌阵 V1.6 RC5
 
 本版基于V1.6 RC4完整源码制作，重点修复赛场事件提示滞留和世界杯比赛退出路径。

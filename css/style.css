@@ -70,3 +70,11 @@ body:not(.show-advanced) .tabs .advanced-tab{display:none}
 .event-overlay .event-close{pointer-events:auto!important}
 .event-overlay.auto-dismiss .event-card{animation:eventPop .22s cubic-bezier(.2,.9,.25,1.1) both,eventAutoDismiss var(--event-duration,900ms) linear forwards}
 @keyframes eventAutoDismiss{0%,68%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-8px)}}
+
+/* V1.7 Alpha 1 Match Director */
+.director-state{margin:10px 8px 12px;padding:10px 14px;border:1px solid rgba(255,215,90,.36);border-radius:16px;background:rgba(5,24,15,.9);display:grid;grid-template-columns:auto 1fr;gap:3px 10px;align-items:center}.director-state b{font-size:15px;color:#ffe08a}.director-state span{font-size:13px}.director-state small{grid-column:1/-1;opacity:.68}.director-state[data-state=pressure]{border-color:#ff8b63}.director-state[data-state=counter]{border-color:#66d7ff}.director-state[data-state=block]{border-color:#aaa}.director-state[data-state=desperate]{border-color:#ff6575}.director-state[data-state=star]{border-color:#d98cff}
+
+.director-state[data-state=pressure]{box-shadow:inset 0 0 22px rgba(255,91,67,.13)}.director-state[data-state=counter]{box-shadow:inset 0 0 22px rgba(71,192,255,.13)}.director-state[data-state=block]{box-shadow:inset 0 0 22px rgba(210,220,225,.09)}.director-state[data-state=desperate]{animation:directorPulse 1.7s ease-in-out infinite}.director-state[data-state=star]{box-shadow:0 0 24px rgba(217,140,255,.18)}.director-report{margin-top:12px}.director-report p{margin:6px 0;font-size:13px}@keyframes directorPulse{50%{border-color:#ffbd67;transform:translateY(-1px)}}
+
+/* V1.7 RC3 final acceptance */
+.acceptance-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin:12px 0}.acceptance-item{display:flex;gap:10px;align-items:flex-start;padding:12px;border:1px solid rgba(255,255,255,.12);border-radius:14px;background:rgba(255,255,255,.035)}.acceptance-item input{margin-top:3px;transform:scale(1.2)}.acceptance-item span{display:flex;flex-direction:column;gap:4px}.acceptance-item small{opacity:.72}
