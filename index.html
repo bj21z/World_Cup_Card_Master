@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#07140d">
-<title>绿茵牌阵：世界杯征途 V1.7.0</title>
+<title>绿茵牌阵：世界杯征途 V1.8 Alpha 2</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div class="app">
 <header class="top hero-top">
-  <div class="brand"><div class="eyebrow">TACTICAL CARD FOOTBALL</div><h1>⚽ 绿茵牌阵：世界杯征途</h1><p id="headerVersion">V1.7.0 · Match Director</p></div>
-  <div class="currency"><span class="pill">💰 <b id="coins">0</b></span><span class="pill">🏆 <b id="wins">0</b></span><span class="pill" id="schemaBadge">🛡️ Schema 23</span></div>
+  <div class="brand"><div class="eyebrow">TACTICAL CARD FOOTBALL</div><h1>⚽ 绿茵牌阵：世界杯征途</h1><p id="headerVersion">V1.8 Alpha 2 · Live Match</p></div>
+  <div class="currency"><span class="pill">💰 <b id="coins">0</b></span><span class="pill">🏆 <b id="wins">0</b></span><span class="pill" id="schemaBadge">🛡️ Schema 24</span></div>
 </header>
 <nav class="tabs">
 <button class="active" data-tab="home">大厅</button>
@@ -31,7 +31,7 @@
    <div><div class="eyebrow">牌阵 · 连携 · 征途</div><h2>每一次出牌，都是一段真实攻防</h2><p>随机1—3人局部对抗、玩家战术决策、阵型影响、个人技能、组合技能、两阶段射门与门将判定、赛后成长报告。</p></div>
    <div class="hero-actions"><button id="goTour" class="btn primary">开启世界杯征途</button><button id="goQuick" class="btn blue">快速比赛</button></div>
  </div>
- <div class="notice beta-banner"><b>V1.7.0 正式版：</b>比赛导演、AI局势响应、动态战术博弈、世界杯连续征程和耐久门禁已完成整合并通过最终真机验收。<br><b>重要说明：</b>本产品仍为非官方、非商业、单机网页开发版；模拟商城不产生真实交易，球员评分属于游戏化评分。</div>
+ <div class="notice beta-banner"><b>V1.8 Alpha 2 · Live Match：</b>新增动态比赛时间、实况事件流、技能/组合加成可见化、一次点击结果解释、V1.8事件账本与Schema 24迁移。<br><b>Alpha提示：</b>基于V1.7.0稳定母版升级，旧存档会自动备份并迁移；本产品仍为非官方、非商业、单机网页开发版。</div>
  <div class="setup">
    <div class="box"><h3>我的球队</h3><select id="quickA"></select><p id="quickASummary" class="small"></p></div>
    <div class="box"><h3>对手球队</h3><select id="quickB"></select><p id="quickBSummary" class="small"></p></div>
@@ -64,17 +64,15 @@
   <button id="openSub" class="btn">换人</button><label class="experiment-toggle"><input id="counterLabToggle" type="checkbox"> P0-C反击实验</label>
  </div>
  <div class="pitch" id="matchPitch"><div id="directorState" class="director-state" data-state="balanced"><b>⚖️ 均势</b><span>双方暂未形成持续压制。</span><small>比赛尚未开始</small></div><div id="eventOverlay" class="event-overlay" aria-live="polite"></div>
-  <div class="scoreboard"><span id="scoreNameA">A</span> <b id="scoreA">0</b> — <b id="scoreB">0</b> <span id="scoreNameB">B</span>
-   <div class="small"><span id="minute">0'</span> · 回合 <span id="round">0</span>/<span id="maxRound">15</span> · 士气 <span id="moraleA">50</span>/<span id="moraleB">50</span></div>
-  </div>
+  <div class="scoreboard v18-scoreboard"><div class="v18-score-line"><span id="scoreNameA">A</span> <b id="scoreA">0</b> — <b id="scoreB">0</b> <span id="scoreNameB">B</span></div><div class="v18-clock"><strong id="v18Clock">0:00</strong><span id="v18Phase">上半场</span></div><div class="small"><span id="minute">0'</span> · 回合 <span id="round">0</span>/<span id="maxRound">15</span> · 士气 <span id="moraleA">50</span>/<span id="moraleB">50</span></div></div>
   <div class="fitness-row"><div id="fitnessA"></div><div id="fitnessB"></div></div>
-  <div id="sceneInfo" class="scene">请先开始比赛。</div>
+  <div id="sceneInfo" class="scene">请先开始比赛。</div><div class="v18-live-panel"><div class="v18-live-head"><b>LIVE · 实况</b><span>事件与技能均来自本回合真实结算</span></div><div id="effectCapsules" class="v18-effect-capsules"></div><div id="liveMatchStream" class="v18-live-stream"><div class="v18-live-empty">比赛开始后，这里会显示最近事件。</div></div></div>
   <div id="tacticPanel" class="tactic-panel hidden">
    <h3>战术指挥</h3><p class="small">根据当前场景选择策略。不同策略会改变能力权重、体能消耗、射门倾向与反击风险。</p>
    <div id="tacticChoices" class="tactic-grid"></div>
   </div>
   <div class="battle"><div class="duel" id="duelA">等待比赛</div><div class="vs">VS</div><div class="duel" id="duelB">等待比赛</div></div>
-  <div id="probExplain" class="explain-card"><b>概率解释：</b>下一回合结算后显示。</div>
+  <div id="probExplain" class="explain-card"><b>概率解释：</b>下一回合结算后显示。</div><button id="v18WhyToggle" class="btn v18-why-toggle hidden" type="button" onclick="document.getElementById('v18WhyDetails').open=!document.getElementById('v18WhyDetails').open">为何形成这个结果？</button><details id="v18WhyDetails" class="v18-why-details"><summary>查看完整解释</summary><div id="v18WhyBody"><p class="small">完成一个回合后可查看真实结算来源。</p></div></details>
   <details class="match-drawer"><summary>关键事件与详细数据</summary><div class="timeline-title">关键事件时间轴</div><div id="matchLog" class="log timeline"><div>比赛日志将在这里显示。</div></div><div id="liveEventStats" class="live-event-stats"></div></details>
   <div class="controls"><button type="button" class="btn primary" id="nextRound" aria-live="polite">生成下一回合</button><button class="btn blue" id="autoFinish">智能托管</button><button class="btn danger" id="resetMatch">退出本场</button></div>
  </div>
@@ -151,7 +149,7 @@
 </section>
 
 <section id="beta" class="panel">
- <div class="hero-card"><div><div class="eyebrow">CLOSED BETA CONTROL</div><h2>封闭Beta测试中心</h2><p>配置测试组、概率说明、新手教学、Bug报告、存档备份和发布演练。</p></div><span class="pill" id="buildBadge">V1.7.0</span></div>
+ <div class="hero-card"><div><div class="eyebrow">CLOSED BETA CONTROL</div><h2>封闭Beta测试中心</h2><p>配置测试组、概率说明、新手教学、Bug报告、存档备份和发布演练。</p></div><span class="pill" id="buildBadge">V1.8 Alpha 2</span></div>
  <div class="two-col"><div class="box"><h2>测试配置</h2><label>测试组<select id="testerGroup"><option>A</option><option>B</option><option>C</option><option>D</option></select></label><label>概率解释<select id="probMode"><option value="full">完整</option><option value="compact">简化</option><option value="expand">默认简化·可展开</option></select></label><button id="applyBetaConfig" class="btn primary full">应用测试配置</button><div id="groupExplain" class="notice compact"></div></div><div class="box"><h2>新手与发布演练</h2><button id="restartTutorial" class="btn full">重新开始五步教学</button><button id="runReleaseRehearsal" class="btn blue full">运行发布演练自检</button><div id="rehearsalResult" class="small">尚未运行。</div></div></div>
  <div class="two-col" style="margin-top:12px"><div class="box"><h2>存档备份与恢复</h2><button id="createBackup" class="btn primary full">创建本机备份</button><div id="backupList"></div></div><div class="box"><h2>设备信息</h2><button id="copyDevice" class="btn full">复制设备与版本信息</button><pre id="deviceInfo" class="device-info"></pre></div></div>
  <div class="box" style="margin-top:12px"><h2>Bug报告</h2><div class="bug-grid"><label>等级<select id="bugSeverity"><option>S1</option><option selected>S2</option><option>S3</option><option>S4</option></select></label><label>标题<input id="bugTitle"></label></div><label>复现步骤<textarea id="bugSteps"></textarea></label><label>实际结果<textarea id="bugActual"></textarea></label><label>预期结果<textarea id="bugExpected"></textarea></label><button id="saveBug" class="btn danger full">保存Bug报告</button><div id="bugList"></div></div>
@@ -173,14 +171,14 @@
  </div>
  <div class="box" style="margin-top:12px"><h2>数据与版权说明</h2><p>球员能力属于基于公开表现构建的游戏化评分，不是FIFA、EA或任何官方评分。当前为非商业原型；正式公开发行前需完成赛事名称、球员姓名、肖像、队徽、国旗和数据授权审查。</p></div>
 </section>
-<div class="footer">V1.7.0 · Match Director · Schema 23 · 非官方非商业单机开发版 · 本地存档</div>
+<div class="footer">V1.8 Alpha 2 · Live Match · Schema 24 · 非官方非商业单机开发版 · 本地存档</div>
 </div>
 
 <div id="modal" class="modal"><div class="modalbox"><div id="resultTitle" class="result"></div><div id="resultBody"></div><button id="closeModal" class="btn primary full">确定</button></div></div>
 <div id="subModal" class="modal"><div class="modalbox"><div class="result">比赛换人</div><div id="subBody"></div><button id="closeSub" class="btn full">关闭</button></div></div>
 <div id="tutorialModal" class="modal"><div class="modalbox tutorial-box"><span id="tutorialStep" class="stage-badge"></span><div id="tutorialTitle" class="result"></div><p id="tutorialBody"></p><div class="controls"><button id="tutorialSkip" class="btn">跳过教学</button><button id="tutorialNext" class="btn primary">下一步</button></div></div></div>
-<div id="welcome" class="modal"><div class="modalbox"><div class="result">V1.7.0 · Match Director 正式版</div><p><b>正式版重点：</b>动态牌阵博弈2.0、比赛导演六状态、AI局势响应、世界杯连续征程、赛事故事、赛后复盘和联合耐久门禁已完成整合。</p><p class="small">当前为非官方、非商业、单机网页开发版，不含真实支付。</p><button id="welcomeClose" class="btn primary full">进入游戏</button></div></div>
+<div id="welcome" class="modal"><div class="modalbox"><div class="result">V1.8 Alpha 2 · Live Match</div><p><b>本次重点：</b>动态比赛时钟、实况事件流、技能/组合加成展示、结果解释链、Schema 24自动迁移与升级前存档快照。</p><p class="small">Alpha测试版；当前为非官方、非商业、单机网页开发版，不含真实支付。</p><button id="welcomeClose" class="btn primary full">进入游戏</button></div></div>
 
 <script src="data/buildConfig.js"></script><script src="data/players.js"></script><script src="data/versionHistory.js"></script><script src="data/contentGovernance.js"></script><script src="data/betaReleaseConfig.js"></script><script src="data/betaConfig.js"></script><script src="data/economy.js"></script><script src="data/missions.js"></script><script src="data/shopItems.js"></script><script src="data/teams.js"></script><script src="data/balance.js"></script><script src="data/skills.js"></script><script src="data/combos.js"></script>
-<script src="js/storage.js"></script><script src="js/matchDirector.js"></script><script src="js/dynamicTacticsEngine.js"></script><script src="js/dynamicTacticsUI.js"></script><script src="js/versionHistoryUI.js"></script><script src="js/contentUI.js"></script><script src="js/betaReleaseManager.js"></script><script src="js/tutorialEngine.js"></script><script src="js/betaTools.js"></script><script src="js/economyEngine.js"></script><script src="js/missionEngine.js"></script><script src="js/shopEngine.js"></script><script src="js/reportExporter.js"></script><script src="js/feedbackEngine.js"></script><script src="js/growthEngine.js"></script><script src="js/lineupEngine.js"></script><script src="js/matchEngine.js"></script><script src="js/tournamentEngine.js"></script><script src="js/render.js"></script><script src="js/simulation.js"></script><script src="js/advancedSimulation.js"></script><script src="js/balanceValidator.js"></script><script src="js/betaQAEngine.js"></script><script src="js/analyticsEngine.js"></script><script src="js/coachEngine.js"></script><script src="js/diagnosticsEngine.js"></script><script src="js/diagnosticsUI.js"></script><script src="js/enduranceEngine.js"></script><script src="js/enduranceUI.js"></script><script src="js/finalAcceptanceUI.js"></script><script src="js/app.js"></script><script src="js/sprint3.js"></script><script src="js/betaReleaseUI.js"></script>
+<script src="js/v18Experience.js"></script><script src="js/storage.js"></script><script src="js/matchDirector.js"></script><script src="js/dynamicTacticsEngine.js"></script><script src="js/dynamicTacticsUI.js"></script><script src="js/versionHistoryUI.js"></script><script src="js/contentUI.js"></script><script src="js/betaReleaseManager.js"></script><script src="js/tutorialEngine.js"></script><script src="js/betaTools.js"></script><script src="js/economyEngine.js"></script><script src="js/missionEngine.js"></script><script src="js/shopEngine.js"></script><script src="js/reportExporter.js"></script><script src="js/feedbackEngine.js"></script><script src="js/growthEngine.js"></script><script src="js/lineupEngine.js"></script><script src="js/matchEngine.js"></script><script src="js/tournamentEngine.js"></script><script src="js/render.js"></script><script src="js/simulation.js"></script><script src="js/advancedSimulation.js"></script><script src="js/balanceValidator.js"></script><script src="js/betaQAEngine.js"></script><script src="js/analyticsEngine.js"></script><script src="js/coachEngine.js"></script><script src="js/diagnosticsEngine.js"></script><script src="js/diagnosticsUI.js"></script><script src="js/enduranceEngine.js"></script><script src="js/enduranceUI.js"></script><script src="js/finalAcceptanceUI.js"></script><script src="js/app.js"></script><script src="js/sprint3.js"></script><script src="js/betaReleaseUI.js"></script>
 </body></html>

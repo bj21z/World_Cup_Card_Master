@@ -60,6 +60,7 @@ docs/V1.6_RC2_RELEASE_NOTES.md
 docs/V1.6_RC2_TEST_REPORT.md
 docs/V1.6_RC3_UX_HOTFIX.md
 docs/V1.6_RC4_DISPLAY_CLARITY.md
+docs/V1.7.0_BASELINE_SHA256.txt
 docs/V1.7.0_CHANGELOG.md
 docs/V1.7.0_DEPLOY_AND_ROLLBACK.md
 docs/V1.7.0_FINAL_ACCEPTANCE_REPORT.md
@@ -81,6 +82,9 @@ docs/V1.7_RC2_FINAL_ACCEPTANCE.md
 docs/V1.7_RC2_RELEASE_APPROVAL.md
 docs/V1.7_RC3_FINAL_VERIFICATION.md
 docs/V1.7_RC4_CRITICAL_UX_HOTFIX.md
+docs/V1.8_ALPHA2_DEPLOY_AND_ROLLBACK.md
+docs/V1.8_ALPHA2_ENGINEERING_TEST.md
+docs/V1.8_ALPHA2_RELEASE_NOTES.md
 index.html
 js/advancedSimulation.js
 js/analyticsEngine.js
@@ -114,6 +118,7 @@ js/sprint3.js
 js/storage.js
 js/tournamentEngine.js
 js/tutorialEngine.js
+js/v18Experience.js
 js/versionHistoryUI.js
 test-kit/BETA_GATE_DECISION.md
 test-kit/DEVICE_RESULTS.csv
