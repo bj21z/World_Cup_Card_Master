@@ -78,3 +78,6 @@ body:not(.show-advanced) .tabs .advanced-tab{display:none}
 
 /* V1.7 RC3 final acceptance */
 .acceptance-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin:12px 0}.acceptance-item{display:flex;gap:10px;align-items:flex-start;padding:12px;border:1px solid rgba(255,255,255,.12);border-radius:14px;background:rgba(255,255,255,.035)}.acceptance-item input{margin-top:3px;transform:scale(1.2)}.acceptance-item span{display:flex;flex-direction:column;gap:4px}.acceptance-item small{opacity:.72}
+
+/* V1.7 RC4 critical UX hotfix */
+.event-overlay:not(.show){display:none!important}.event-overlay.show{display:flex!important}.event-overlay .event-card{pointer-events:none!important}.event-overlay .event-close{display:none!important}

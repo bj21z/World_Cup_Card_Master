@@ -11,8 +11,9 @@
   const done=gates.filter(([id])=>state[id]).length;
   root.innerHTML=`<div class="hero-card"><div><div class="eyebrow">FINAL RELEASE GATE</div><h2>V1.7最终真机验收中心</h2><p>仅记录你在真实设备上已经亲自完成的项目。程序级检查不能代替真机结果。</p></div><span class="pill">${done}/${gates.length} 已通过</span></div>
   <div class="box" style="margin-top:12px"><div class="acceptance-grid">${gates.map(([id,label],i)=>`<label class="acceptance-item"><input type="checkbox" data-gate="${id}" ${state[id]?'checked':''}><span><b>${i+1}. ${label}</b><small>${state[id]?'已确认':'待确认'}</small></span></label>`).join('')}</div>
-  <div class="controls"><button id="exportAcceptance" class="btn primary">导出验收结果</button><button id="clearAcceptance" class="btn danger">清空验收记录</button></div><div class="notice compact">全部14项完成后，才具备召开V1.7.0正式发布批准会的事实基础。</div></div>`;
+  <div class="controls"><button id="goEndurance50" class="btn blue">前往50场耐久门禁</button><button id="exportAcceptance" class="btn primary">导出验收结果</button><button id="clearAcceptance" class="btn danger">清空验收记录</button></div><div class="notice compact">全部14项完成后，才具备召开V1.7.0正式发布批准会的事实基础。</div></div>`;
   root.querySelectorAll('[data-gate]').forEach(el=>el.addEventListener('change',()=>{const s=load();s[el.dataset.gate]=el.checked;s.updatedAt=new Date().toISOString();save(s);render();}));
+  document.getElementById('goEndurance50').onclick=()=>{if(typeof switchTab==='function')switchTab('lab');setTimeout(()=>{const el=document.getElementById('enduranceGate');if(el){const sel=document.getElementById('enduranceCount');if(sel)sel.value='50';el.scrollIntoView({behavior:'smooth',block:'start'});}},80);};
   document.getElementById('clearAcceptance').onclick=()=>{if(confirm('确定清空全部验收记录吗？')){localStorage.removeItem(KEY);render();}};
   document.getElementById('exportAcceptance').onclick=()=>{
     const s=load(); const payload={build:(window.BUILD_CONFIG||{}).version,schema:(window.BUILD_CONFIG||{}).schema,updatedAt:s.updatedAt||null,passed:gates.filter(([id])=>s[id]).map(([,l])=>l),pending:gates.filter(([id])=>!s[id]).map(([,l])=>l)};
