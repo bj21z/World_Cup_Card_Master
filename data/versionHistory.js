@@ -1,4 +1,7 @@
 window.VERSION_HISTORY = [
+ {version:'V1.9',date:'2026-08-07',stage:'验证强化升级版',title:'Validation Hardened',highlights:['成立独立游戏验证部门并把验证门禁内置到竞技实验室','世界杯赛事统计增加matchId幂等保护，阻断同一比赛重复入账','关键事件浮层继续采用非阻断预算并增加安全字段兜底','新增动态时钟、事件唯一性、Effect关联、undefined/NaN、赛事统计与恢复风险专项检查','保留Schema 24与V1.8比赛核心数值，不借验证升级偷偷改胜率公式'],schema:24},
+ {version:'V1.8 Alpha 2 RC1',date:'2026-08-07',stage:'Alpha候选修复版',title:'Live Match · Audit Fix',highlights:['修复45分钟边界阶段标签可能提前显示下半场的问题','技能与组合效果从聚合数字升级为具体触发项，并保持与实际封顶后结算贡献一致','红黄牌正式写入V1.8 Event Ledger与完整时间轴','继续保持Schema 24及V1.7比赛核心数值不变'],schema:24},
+
  {version:'V1.8 Alpha 2',date:'2026-08-07',stage:'Alpha测试版',title:'Live Match 实况比赛体验层',highlights:['新增动态足球比赛时钟与上下半场表达，后台仍保持回合制结算','新增LIVE实况事件流，比赛过程、技能与组合协同不再只存在于后台','新增为何形成这个结果解释入口，技能/组合/士气/临场波动直接读取真实结算','新增V1.8 Event Ledger、Effect Ledger与事件唯一ID，赛后提供比赛故事和完整时间轴','Schema升级至24：旧存档自动建立升级前快照并增量迁移；基于V1.7.0稳定母版开发'],schema:24},
 
  {version:'V1.7.0',date:'2026-08-07',stage:'正式发布版',title:'Match Director',highlights:['最终真机门禁全部通过：存档恢复、世界杯连续链路、Safari生命周期、淘汰与夺冠结局均正常','整合动态牌阵博弈2.0、比赛导演六状态、AI局势响应和世界杯赛事故事','修复高频事件浮层滞留、攻守身份固定显示和版本标识不一致问题','100场联合耐久门禁通过且未发现阻断性异常','保持Schema 23、既有数值规则和非付费竞技公平边界'],schema:23},
