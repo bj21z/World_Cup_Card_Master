@@ -1,13 +1,9 @@
-# V1.6 RC3 UX Hotfix
+# V1.6 RC5 UX Hotfix
 
-- 淘汰赛统计切换修复
-- 赛场事件非阻断化
-- 组合技能解释增强
-- Schema 22保持不变
-
-# 绿茵牌阵：世界杯征途 V1.6 RC2
-
-三轨联合验证版：P0-A比赛一屏决策、P0-B世界杯统计/赛后报告、P0-C防守反击链实验场。基线：V1.4.0正式发布版。Schema仍为21。
-
-修改：index.html、css/style.css、js/app.js、js/matchEngine.js、js/tournamentEngine.js。
-新增：V1.5_VALIDATION.md。其余V1.4.0文件保持不变。
+- 修复赛场事件提示在iPhone Safari中长时间滞留的问题。
+- 提示层不再拦截牌阵、详情区或底部操作按钮的触控。
+- 使用定时器、CSS动画结束和requestAnimationFrame到期检查三重清理。
+- 点击“生成下一回合”或选择战术时，残留提示立即清除。
+- 比赛结束、切换页面、切后台时强制清除提示。
+- 世界杯小组赛或淘汰赛点击“退出本场”后，优先返回世界杯征程界面。
+- Schema 22保持不变；比赛数值和世界杯规则未调整。

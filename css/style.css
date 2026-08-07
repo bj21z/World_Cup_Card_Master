@@ -61,3 +61,12 @@ body:not(.show-advanced) .tabs .advanced-tab{display:none}
 .dt-tactics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:12px 0}.dt-tactic{min-height:74px}.dt-tactic.selected{outline:2px solid #8cffb5;transform:translateY(-1px)}.dt-second{padding:10px;border-radius:14px;background:rgba(63,39,112,.35);border:1px solid rgba(177,143,255,.34)}
 .dt-review-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.dt-review-item{padding:12px;border-radius:14px;background:rgba(255,255,255,.06)}
 @media(max-width:760px){.dynamic-setup{grid-template-columns:1fr 1fr}.dynamic-setup button{width:100%}.dt-duel{grid-template-columns:1fr}.dt-duel>.vs{display:none}.dt-cards{grid-template-columns:repeat(3,minmax(0,1fr))}.dt-tactics{grid-template-columns:1fr 1fr}.dt-score{top:env(safe-area-inset-top);font-size:13px}.dt-score strong{font-size:24px}.dt-review-grid{grid-template-columns:1fr}}
+
+.combo-banner small{display:block;font-size:.72em;font-weight:500;opacity:.8;margin-top:2px}.decision-help{display:block;margin-top:8px;line-height:1.45;opacity:.8}.side-title{line-height:1.35}
+
+/* V1.6 RC5: transient match events never block gameplay */
+.event-overlay,.event-overlay.show{pointer-events:none!important}
+.event-overlay .event-card{pointer-events:none!important}
+.event-overlay .event-close{pointer-events:auto!important}
+.event-overlay.auto-dismiss .event-card{animation:eventPop .22s cubic-bezier(.2,.9,.25,1.1) both,eventAutoDismiss var(--event-duration,900ms) linear forwards}
+@keyframes eventAutoDismiss{0%,68%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-8px)}}
