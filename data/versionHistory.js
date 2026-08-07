@@ -1,4 +1,5 @@
 window.VERSION_HISTORY = [
+ {version:'V2.0',date:'2026-08-07',stage:'下一代产品升级版',title:'Match Command · 指挥中心',highlights:['首页重构为比赛指挥中心：世界杯状态、球队状态、快速开赛和验证状态同屏','全局版本显示统一改为V2.0 Match Command，清除V1.8/V1.9旧版可见标识漂移','移动端主导航收敛为五个高频入口，其余功能归入更多功能，降低横向菜单负担','比赛页强化中央记分牌、动态时钟和LIVE信息层，保持关键操作同屏且禁止阻断浮层','独立游戏验证部门升级为正式发布门禁，世界杯matchId幂等、Event/Effect一致性继续保留','保持Schema 24、球员基础能力、核心胜率公式、世界杯晋级规则与经济公平边界不变'],schema:24},
  {version:'V1.9',date:'2026-08-07',stage:'验证强化升级版',title:'Validation Hardened',highlights:['成立独立游戏验证部门并把验证门禁内置到竞技实验室','世界杯赛事统计增加matchId幂等保护，阻断同一比赛重复入账','关键事件浮层继续采用非阻断预算并增加安全字段兜底','新增动态时钟、事件唯一性、Effect关联、undefined/NaN、赛事统计与恢复风险专项检查','保留Schema 24与V1.8比赛核心数值，不借验证升级偷偷改胜率公式'],schema:24},
  {version:'V1.8 Alpha 2 RC1',date:'2026-08-07',stage:'Alpha候选修复版',title:'Live Match · Audit Fix',highlights:['修复45分钟边界阶段标签可能提前显示下半场的问题','技能与组合效果从聚合数字升级为具体触发项，并保持与实际封顶后结算贡献一致','红黄牌正式写入V1.8 Event Ledger与完整时间轴','继续保持Schema 24及V1.7比赛核心数值不变'],schema:24},
 

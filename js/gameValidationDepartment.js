@@ -35,7 +35,7 @@
  function render(){
   const host=document.getElementById('validationDepartment');if(!host)return;
   const r=scan(), rank={P0:0,P1:1,P2:2,P3:3,INFO:9};r.issues.sort((a,b)=>(rank[a.sev]??8)-(rank[b.sev]??8));
-  host.innerHTML=`<div class="hero-card"><div><div class="eyebrow">INDEPENDENT GAME VALIDATION</div><h2>游戏验证部门 · V1.9</h2><p>验证部独立发现、排序和移交问题；开发组负责论证与修复，验证部负责复验，不允许开发者自批自验。</p></div><span class="pill">${r.issues.length?'发现 '+r.issues.length+' 项':'当前扫描通过'}</span></div>
+  host.innerHTML=`<div class="hero-card"><div><div class="eyebrow">INDEPENDENT GAME VALIDATION</div><h2>游戏验证部门 · V2.0</h2><p>验证部独立发现、排序和移交问题；开发组负责论证与修复，验证部负责复验，不允许开发者自批自验。</p></div><span class="pill">${r.issues.length?'发现 '+r.issues.length+' 项':'当前扫描通过'}</span></div>
   <div class="two-col"><div class="box"><h3>专家席位与专长</h3>${experts.map(x=>`<p><b>${esc(x[0])}</b><br><span class="small">${esc(x[1])}</span></p>`).join('')}</div>
   <div class="box"><h3>验证→开发移交流程</h3><p>验证部发现 → P0/P1/P2排序 → 对应核心组复现 → 技术/玩法论证 → 修复 → 回归 → 验证部复验 → 发布门禁。</p><button id="runValidationDept" class="btn primary full">重新运行验证部门扫描</button><div class="notice compact">P0/P1不得带入下一发布候选；P2原则上关闭；建议项不自动改变核心数值。</div></div></div>
   <div class="box" style="margin-top:12px"><h3>当前问题排序</h3>${r.issues.length?r.issues.map(x=>`<div class="qa-row bad"><b>${x.sev} · ${esc(x.id)} · ${esc(x.title)}</b><span>${esc(x.owner)}｜${esc(x.detail)}</span></div>`).join(''):'<div class="qa-row ok"><b>✓ 当前可自动检查项未发现阻断</b><span>真机Safari、锁屏恢复与真实长时间体验仍需设备验证。</span></div>'}</div>
